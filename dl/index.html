@@ -184,6 +184,12 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
+        .card-link {
+            display: block;          /* 让 a 占满整行 */
+            text-decoration: none;   /* 去掉下划线 */
+            color: inherit;          /* 文字颜色继承，不变成蓝色 */
+            /* 卡片的 hover 效果可以移到 .card 上，或者保留 */
+        }
 
         /* ----- 响应式布局 ----- */
         @media (max-width: 992px) {
@@ -272,15 +278,17 @@
         <!-- 卡片 1 （示例）          -->
         <!-- 复制此块即可添加新卡片   -->
         <!-- ======================== -->
-        <div class="card">
-            <div class="card-image">
-                <img src="../image/chengzi.png" alt="作品封面" />
+        <a class="card-link" href="https://github.com/Zhuziexe/zhuziexe.github.io/raw/refs/heads/main/files/ChengziOS0.5.1.sb3">
+            <div class="card">
+                <div class="card-image">
+                    <img src="../image/chengzi.png" alt="作品封面" />
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">ChengziOS</h3>
+                    <p class="card-desc">用Scratch/Turbowarp做的伪系统(点击下载)</p>
+                </div>
             </div>
-            <div class="card-body">
-                <h3 class="card-title">ChengziOS</h3>
-                <p class="card-desc">用Scratch/Turbowarp做的伪系统</p>
-            </div>
-        </div>
+        </a>
         <!-- 后续卡片继续复制此处 -->
         <!-- 例如：
         <div class="card">
