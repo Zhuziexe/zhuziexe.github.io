@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ChengziOS · 详情</title>
     <style>
-        /* ----- 全局重置 ----- */
         * {
             margin: 0;
             padding: 0;
@@ -16,49 +15,10 @@
             min-height: 100vh;
             background: linear-gradient(145deg, #e6f3ff 0%, #b3d9f5 100%);
             font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-            padding: 0;
-            /* 卡片通过固定定位占据视口，所以 body 无额外边距 */
             overflow: hidden;
-            /* 防止滚动条干扰全屏卡片 */
         }
 
-        /* ----- 返回按钮 (固定在左上角，在卡片外部) ----- */
-        .back-btn {
-            position: fixed;
-            top: 24px;
-            left: 24px;
-            z-index: 100;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 22px;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            border-radius: 40px;
-            color: #0a3153;
-            font-weight: 600;
-            font-size: 1.05rem;
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 6px 20px rgba(43, 127, 199, 0.20);
-            transition: all 0.25s ease;
-            letter-spacing: 0.3px;
-        }
-
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.92);
-            box-shadow: 0 8px 28px rgba(43, 127, 199, 0.35);
-            transform: scale(1.03);
-        }
-
-        .back-btn svg {
-            width: 22px;
-            height: 22px;
-            fill: currentColor;
-        }
-
-        /* ----- 巨型卡片 (跟随窗口缩放，四周间距固定) ----- */
+        /* ----- 巨型卡片 (跟随窗口) ----- */
         .card-container {
             position: fixed;
             top: 20px;
@@ -78,20 +38,53 @@
             display: flex;
             flex-direction: column;
             padding: 30px 40px 30px 40px;
-            /* 内部内容内边距，但标题、简介和图片区域各自处理 */
-            transition: box-shadow 0.3s ease;
+            position: relative;
+            /* 让内部绝对定位的箭头相对于卡片定位 */
         }
 
-        /* 卡片内部布局：头部（标题+简介+按钮） + 图片（剩余空间） */
+        /* ----- 返回箭头 (卡片内部左上角) ----- */
+        .back-arrow {
+            position: absolute;
+            top: 28px;
+            left: 28px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 12px rgba(43, 127, 199, 0.15);
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: #0a3153;
+        }
+
+        .back-arrow:hover {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 6px 20px rgba(43, 127, 199, 0.3);
+            transform: scale(1.08);
+        }
+
+        .back-arrow svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+            display: block;
+        }
+
+        /* ----- 卡片头部 (标题 + 简介 + 下载按钮) ----- */
         .card-header {
             display: flex;
             flex-direction: column;
-            /* 默认列 */
             flex-shrink: 0;
-            /* 不压缩头部 */
             position: relative;
-            /* 为右上角按钮绝对定位提供基准 */
-            padding-bottom: 16px;
+            padding: 8px 0 16px 60px;
+            /* 左内边距给箭头腾位 */
             border-bottom: 2px solid rgba(160, 200, 240, 0.3);
             margin-bottom: 18px;
         }
@@ -100,10 +93,9 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            /* 左对齐 */
-            gap: 6px;
+            gap: 4px;
             padding-right: 120px;
-            /* 为右上角按钮留空间 */
+            /* 给下载按钮留空间 */
         }
 
         .card-title {
@@ -124,7 +116,7 @@
             margin: 0;
         }
 
-        /* 下载按钮 - 右上角 */
+        /* ----- 下载按钮 (右上角) ----- */
         .download-btn {
             position: absolute;
             top: 0;
@@ -137,9 +129,7 @@
             font-weight: 600;
             text-decoration: none;
             border-radius: 60px;
-            box-shadow:
-                0 8px 24px rgba(43, 127, 199, 0.35),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 24px rgba(43, 127, 199, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.3);
             transition: all 0.25s ease;
             letter-spacing: 0.5px;
@@ -156,11 +146,10 @@
             transform: scale(0.96);
         }
 
-        /* 图片区域 - 占据剩余空间，图片填满 */
+        /* ----- 图片区域 (底部大图) ----- */
         .card-image-wrapper {
             flex: 1;
             min-height: 0;
-            /* 防止flex溢出 */
             border-radius: 20px;
             overflow: hidden;
             background: rgba(200, 225, 245, 0.3);
@@ -174,7 +163,6 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            /* 保持比例，完全显示 */
             display: block;
             transition: transform 0.4s ease;
         }
@@ -183,7 +171,7 @@
             transform: scale(1.02);
         }
 
-        /* 响应式调整：小屏幕内边距缩小，按钮文字适应 */
+        /* ----- 响应式调整 ----- */
         @media (max-width: 768px) {
             .card-container {
                 padding: 20px 20px 20px 20px;
@@ -194,32 +182,60 @@
                 bottom: 16px;
             }
 
+            .back-arrow {
+                top: 20px;
+                left: 20px;
+                width: 38px;
+                height: 38px;
+            }
+
+            .back-arrow svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .card-header {
+                padding-left: 50px;
+                padding-top: 6px;
+                padding-bottom: 12px;
+            }
+
             .title-group {
                 padding-right: 80px;
-                /* 按钮空间缩小 */
             }
 
             .download-btn {
                 padding: 8px 18px;
                 font-size: 1rem;
             }
-
-            .back-btn {
-                top: 16px;
-                left: 16px;
-                padding: 6px 14px;
-                font-size: 0.9rem;
-            }
         }
 
         @media (max-width: 480px) {
             .card-container {
-                padding: 16px 16px 12px 16px;
+                padding: 14px 14px 12px 14px;
                 border-radius: 24px;
                 top: 12px;
                 left: 12px;
                 right: 12px;
                 bottom: 12px;
+            }
+
+            .back-arrow {
+                top: 14px;
+                left: 14px;
+                width: 34px;
+                height: 34px;
+            }
+
+            .back-arrow svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .card-header {
+                padding-left: 44px;
+                padding-top: 4px;
+                padding-bottom: 10px;
             }
 
             .title-group {
@@ -230,33 +246,26 @@
                 padding: 6px 14px;
                 font-size: 0.85rem;
             }
-
-            .back-btn {
-                top: 12px;
-                left: 12px;
-                padding: 4px 12px;
-                font-size: 0.8rem;
-            }
         }
     </style>
 </head>
 <body>
 
-    <!-- 返回按钮 (回到上级目录 ../) -->
-    <a href="../" class="back-btn">
-        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-        返回
-    </a>
-
-    <!-- 巨型卡片 -->
     <div class="card-container">
-        <!-- 头部：标题 + 简介 + 下载按钮 -->
+
+        <!-- 返回箭头 (卡片内部左上角) -->
+        <a href="../" class="back-arrow" aria-label="返回">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+        </a>
+
+        <!-- 头部 -->
         <div class="card-header">
             <div class="title-group">
                 <h1 class="card-title">ChengziOS</h1>
                 <p class="card-sub">用 Scratch / Turbowarp 做的伪系统</p>
             </div>
-            <!-- 下载按钮 (右上角) -->
             <a href="https://github.com/Zhuziexe/zhuziexe.github.io/raw/refs/heads/main/files/ChengziOS0.5.1.sb3"
                class="download-btn"
                target="_blank"
@@ -265,7 +274,7 @@
             </a>
         </div>
 
-        <!-- 图片区域 (底部大图) -->
+        <!-- 图片 -->
         <div class="card-image-wrapper">
             <img src="../../image/chengzi.png" alt="ChengziOS 预览图" />
         </div>
