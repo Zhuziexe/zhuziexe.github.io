@@ -18,13 +18,13 @@
             overflow: hidden;
         }
 
-        /* ----- 巨型卡片 (跟随窗口) ----- */
+        /* ----- 巨型卡片 (跟随窗口) 调整 right 为 30px ----- */
         .card-container {
             position: fixed;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
+            top: 30px;
+            left: 30px;
+            right: 30px;      /* 原先为 20px，现在增大为 30px */
+            bottom: 30px;     /* 同样增大，保持对称 */
             background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -39,7 +39,6 @@
             flex-direction: column;
             padding: 30px 40px 30px 40px;
             position: relative;
-            /* 让内部绝对定位的箭头相对于卡片定位 */
         }
 
         /* ----- 返回箭头 (卡片内部左上角) ----- */
@@ -77,16 +76,16 @@
             display: block;
         }
 
-        /* ----- 卡片头部 (标题 + 简介 + 下载按钮) ----- */
+        /* ----- 卡片头部 ----- */
         .card-header {
             display: flex;
             flex-direction: column;
             flex-shrink: 0;
             position: relative;
             padding: 8px 0 16px 60px;
-            /* 左内边距给箭头腾位 */
             border-bottom: 2px solid rgba(160, 200, 240, 0.3);
             margin-bottom: 18px;
+            overflow: hidden;   /* 防止内容溢出 */
         }
 
         .title-group {
@@ -94,8 +93,8 @@
             flex-direction: column;
             align-items: flex-start;
             gap: 4px;
-            padding-right: 120px;
-            /* 给下载按钮留空间 */
+            max-width: calc(100% - 140px);  /* 给下载按钮预留空间，防止文字溢出 */
+            padding-right: 20px;            /* 增加一点右侧内边距 */
         }
 
         .card-title {
@@ -106,6 +105,7 @@
             text-shadow: 0 2px 4px rgba(255, 255, 255, 0.4);
             margin: 0;
             line-height: 1.2;
+            word-break: break-word;  /* 长单词换行 */
         }
 
         .card-sub {
@@ -146,7 +146,7 @@
             transform: scale(0.96);
         }
 
-        /* ----- 图片区域 (底部大图) ----- */
+        /* ----- 图片区域 ----- */
         .card-image-wrapper {
             flex: 1;
             min-height: 0;
@@ -176,10 +176,10 @@
             .card-container {
                 padding: 20px 20px 20px 20px;
                 border-radius: 28px;
-                top: 16px;
-                left: 16px;
-                right: 16px;
-                bottom: 16px;
+                top: 20px;
+                left: 20px;
+                right: 20px;    /* 小屏边距改为 20px */
+                bottom: 20px;
             }
 
             .back-arrow {
@@ -201,7 +201,8 @@
             }
 
             .title-group {
-                padding-right: 80px;
+                max-width: calc(100% - 100px);
+                padding-right: 10px;
             }
 
             .download-btn {
@@ -214,10 +215,10 @@
             .card-container {
                 padding: 14px 14px 12px 14px;
                 border-radius: 24px;
-                top: 12px;
-                left: 12px;
-                right: 12px;
-                bottom: 12px;
+                top: 16px;
+                left: 16px;
+                right: 16px;   /* 小屏边距 16px */
+                bottom: 16px;
             }
 
             .back-arrow {
@@ -239,7 +240,8 @@
             }
 
             .title-group {
-                padding-right: 60px;
+                max-width: calc(100% - 80px);
+                padding-right: 6px;
             }
 
             .download-btn {
@@ -253,7 +255,7 @@
 
     <div class="card-container">
 
-        <!-- 返回箭头 (卡片内部左上角) -->
+        <!-- 返回箭头 -->
         <a href="../" class="back-arrow" aria-label="返回">
             <svg viewBox="0 0 24 24">
                 <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
