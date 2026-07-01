@@ -1,1 +1,199 @@
-<h1>这是一个网页</h1>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>竹子 · 主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(145deg, #e6f3ff 0%, #b3d9f5 100%);
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            padding: 20px;
+        }
+
+        /* 卡片 - 浅蓝色系装饰 */
+        .card {
+            max-width: 480px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 40px;
+            padding: 40px 35px 45px;
+            box-shadow:
+                0 25px 50px -12px rgba(70, 150, 220, 0.35),
+                inset 0 2px 4px rgba(255, 255, 255, 0.7),
+                0 0 0 1px rgba(180, 215, 245, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: transform 0.25s ease, box-shadow 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow:
+                0 30px 60px -15px rgba(50, 130, 210, 0.45),
+                inset 0 2px 4px rgba(255, 255, 255, 0.7),
+                0 0 0 1px rgba(160, 200, 240, 0.6);
+        }
+
+        /* 内部光晕装饰（浅蓝色） */
+        .card .glow {
+            position: absolute;
+            top: -60%;
+            left: -30%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%, rgba(160, 210, 255, 0.15), transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* 四角装饰圆点（浅蓝色） */
+        .card::before,
+        .card::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .card::before {
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, #8ec6f0, transparent 70%);
+            top: -30px;
+            right: -20px;
+        }
+
+        .card::after {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #b3d9f5, transparent 70%);
+            bottom: -25px;
+            left: -20px;
+        }
+
+        /* 标题区域：图标 + 标题 水平居中 */
+        .title-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 32px;  /* 原先分割线占的空间直接给到标题与按钮间距 */
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 图标 */
+        .title-icon {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(30, 120, 200, 0.25));
+            flex-shrink: 0;
+        }
+
+        /* 主标题 - “竹子” */
+        .card-title {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #0a3153;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.6);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        /* 按钮 - “作品下载” */
+        .btn {
+            display: inline-block;
+            padding: 16px 50px;
+            background: linear-gradient(145deg, #4a9fe0, #2b7fc7);
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 60px;
+            box-shadow:
+                0 8px 24px rgba(43, 127, 199, 0.4),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.25s ease;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn:hover {
+            background: linear-gradient(145deg, #5cb0f0, #2f8ad4);
+            box-shadow:
+                0 12px 32px rgba(43, 127, 199, 0.55),
+                inset 0 2px 4px rgba(255, 255, 255, 0.4);
+            transform: scale(1.02) translateY(-2px);
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+            box-shadow: 0 4px 12px rgba(43, 127, 199, 0.3);
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 480px) {
+            .card {
+                padding: 30px 20px 35px;
+                border-radius: 30px;
+            }
+
+            .title-wrapper {
+                gap: 10px;
+                margin-bottom: 28px;
+            }
+
+            .title-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .card-title {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 14px 36px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- 装饰光晕 -->
+        <div class="glow"></div>
+
+        <!-- 标题区：图标 + 标题 -->
+        <div class="title-wrapper">
+            <img class="title-icon" src="./image/zhuzi.png" alt="竹子图标" />
+            <h1 class="card-title">竹子</h1>
+        </div>
+
+        <!-- 按钮：跳转 ./dl/，文字“作品下载” -->
+        <a href="./dl/" class="btn">作品下载</a>
+    </div>
+</body>
+</html>
