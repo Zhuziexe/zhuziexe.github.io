@@ -1,6 +1,5 @@
 /**
- * 主题切换核心逻辑（修复版）
- * 无按钮的页面也能自动应用主题
+ * 主题切换核心逻辑（图标：浅色=月亮，深色=太阳）
  */
 (function() {
     const body = document.body;
@@ -18,10 +17,11 @@
             body.classList.add('light');
         }
 
-        // 如果页面存在图标元素，更新它（可选）
+        // 更新图标（如果存在）
         const icon = document.getElementById('themeIcon');
         if (icon) {
             if (theme === 'dark') {
+                // ☀️ 深色模式下显示太阳（点击可切换到浅色）
                 icon.innerHTML = `
                     <circle cx="12" cy="12" r="5"/>
                     <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -36,9 +36,9 @@
                     </g>
                 `;
             } else {
+                // 🌙 浅色模式下显示弯月（点击可切换到深色）
                 icon.innerHTML = `
-                    <path d="M12 3a9 9 0 1 0 9 9 9 9 0 0 0-9-9zm0 16a7 7 0 1 1 7-7 7 7 0 0 1-7 7z"/>
-                    <path d="M12 5v2M12 17v2M7.05 7.05l1.41 1.41M15.54 15.54l1.41 1.41M5 12h2M17 12h2M7.05 16.95l1.41-1.41M15.54 8.46l1.41-1.41"/>
+                    <path d="M12 2A10 10 0 1 0 22 12 9 9 0 0 1 12 2z"/>
                 `;
             }
         }
@@ -65,10 +65,10 @@
         }
     });
 
-    // ★ 关键：先应用主题（无论有没有按钮）
+    // 初始化
     applyTheme(getPreferredTheme());
 
-    // 如果页面有切换按钮，绑定点击事件
+    // 绑定按钮
     const toggleBtn = document.getElementById('themeToggle');
     if (toggleBtn) {
         toggleBtn.addEventListener('click', toggleTheme);
