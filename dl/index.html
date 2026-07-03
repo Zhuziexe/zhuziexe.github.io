@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>空间</title>
     <style>
-        /* ----- 全局样式 ----- */
+        /* ===== 全局样式 ===== */
         * {
             margin: 0;
             padding: 0;
@@ -22,16 +22,30 @@
             align-items: center;
         }
 
-        /* ----- 顶部导航栏 ----- */
+        /* ===== 页面整体进入动画 ===== */
+        .page-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== 顶部导航栏 ===== */
         .header {
             position: relative;
             width: 100%;
-            max-width: 1200px;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px 0 30px;
-            /* 给返回按钮留出空间 */
         }
 
         /* 返回按钮 - 左上角 */
@@ -93,10 +107,9 @@
             line-height: 1.2;
         }
 
-        /* ----- 卡片网格 ----- */
+        /* ===== 卡片网格 ===== */
         .grid {
             width: 100%;
-            max-width: 1200px;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 24px;
@@ -117,9 +130,7 @@
             transition: transform 0.25s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
-            /* 固定卡片尺寸 (可根据需要调整) */
             height: 380px;
-            /* 宽由网格决定，但限制最小宽度 */
             min-width: 0;
         }
 
@@ -184,14 +195,25 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
+
         .card-link {
-            display: block;          /* 让 a 占满整行 */
-            text-decoration: none;   /* 去掉下划线 */
-            color: inherit;          /* 文字颜色继承，不变成蓝色 */
-            /* 卡片的 hover 效果可以移到 .card 上，或者保留 */
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            /* ===== 卡片进入动画（初始隐藏，由 JS 控制显示） ===== */
+            opacity: 0;
+            transform: translateY(30px);
+            animation: cardFadeUp 0.5s ease forwards;
         }
 
-        /* ----- 响应式布局 ----- */
+        @keyframes cardFadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== 响应式布局 ===== */
         @media (max-width: 992px) {
             .grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -257,56 +279,62 @@
     </style>
 </head>
 <body>
-    <!-- 顶部：返回按钮 + 标题 -->
-    <header class="header">
-        <!-- 返回按钮 (回到上级目录 ../) -->
-        <a href="../" class="back-btn">
-            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-            返回
-        </a>
 
-        <!-- 标题：图标 + “作品下载” -->
-        <div class="title-wrapper">
-            <img class="title-icon" src="../image/zhuzi.png" alt="竹子图标" />
-            <h1 class="page-title">空间</h1>
-        </div>
-    </header>
+    <!-- ===== 页面包裹层（整体动画） ===== -->
+    <div class="page-wrapper">
 
-    <!-- 卡片网格 -->
-    <div class="grid">
-        <!-- ======================== -->
-        <!-- 卡片 1 （示例）          -->
-        <!-- 复制此块即可添加新卡片   -->
-        <!-- ======================== -->
-         <a class="card-link" href="./zhuziwin32/">
-            <div class="card">
-                <div class="card-image">
-                    <img src="../image/zhuziwin32.png" alt="作品封面" />
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">ZhuziWin32</h3>
-                    <p class="card-desc">一个轻量级C++图形界面库</p>
-                </div>
+        <!-- 顶部：返回按钮 + 标题 -->
+        <header class="header">
+            <a href="../" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                返回
+            </a>
+            <div class="title-wrapper">
+                <img class="title-icon" src="../image/zhuzi.png" alt="竹子图标" />
+                <h1 class="page-title">空间</h1>
             </div>
-        </a>
-        <a class="card-link" href="./chengzios/">
-            <div class="card">
-                <div class="card-image">
-                    <img src="../image/chengzi.png" alt="作品封面" />
+        </header>
+
+        <!-- 卡片网格 -->
+        <div class="grid">
+            <a class="card-link" href="./zhuziwin32/">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="../image/zhuziwin32.png" alt="作品封面" />
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">ZhuziWin32</h3>
+                        <p class="card-desc">一个轻量级C++图形界面库</p>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h3 class="card-title">ChengziOS</h3>
-                    <p class="card-desc">用Scratch/Turbowarp做的伪系统(点击下载)</p>
+            </a>
+            <a class="card-link" href="./chengzios/">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="../image/chengzi.png" alt="作品封面" />
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">ChengziOS</h3>
+                        <p class="card-desc">用Scratch/Turbowarp做的伪系统(点击下载)</p>
+                    </div>
                 </div>
-            </div>
-        </a>
-        <!-- 后续卡片继续复制此处 -->
-        <!-- 例如：
-        <div class="card">
-            <div class="card-image"><img src="..." alt="..." /></div>
-            <div class="card-body"><h3 class="card-title">...</h3><p class="card-desc">...</p></div>
+            </a>
+            <!-- 后续卡片继续复制此处 -->
         </div>
-        -->
+
     </div>
+
+    <!-- ===== 脚本：动态设置卡片延迟 ===== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card-link');
+            cards.forEach((card, index) => {
+                // 每个卡片延迟 0.08s * index，最大不超过 0.6s
+                const delay = Math.min(0.08 * index, 0.6);
+                card.style.animationDelay = delay + 's';
+            });
+        });
+    </script>
+
 </body>
 </html>
