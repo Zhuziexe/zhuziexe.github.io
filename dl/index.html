@@ -330,7 +330,7 @@
             const cards = document.querySelectorAll('.card-link');
             cards.forEach((card, index) => {
                 // 每个卡片延迟 0.08s * index，最大不超过 0.6s
-                const delay = Math.min(0.08 * index, 0.6);
+                const delay = Math.min(0.16 * index, 0.6);
                 card.style.animationDelay = delay + 's';
             });
         });
