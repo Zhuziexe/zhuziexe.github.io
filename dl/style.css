@@ -2,7 +2,6 @@
    CSS 变量（浅色 / 深色）
    ============================================================ */
 :root {
-    /* 浅色模式（默认） */
     --bg-start: #e6f3ff;
     --bg-end: #b3d9f5;
     --card-bg: rgba(255, 255, 255, 0.75);
@@ -11,26 +10,15 @@
     --card-shadow-hover: rgba(50, 130, 210, 0.30);
     --text-primary: #0a3153;
     --text-secondary: #2c5778;
-    --text-muted: #4a7a9e;
     --back-btn-bg: rgba(255, 255, 255, 0.6);
     --back-btn-border: rgba(255, 255, 255, 0.4);
-    --divider: rgba(160, 200, 240, 0.3);
     --glow-color: rgba(140, 200, 240, 0.25);
-    --btn-bg: linear-gradient(145deg, #4a9fe0, #2b7fc7);
-    --btn-shadow: rgba(43, 127, 199, 0.4);
-    --btn-shadow-hover: rgba(43, 127, 199, 0.55);
     --card-image-bg: #f0f8ff;
     --card-body-bg: rgba(255, 255, 255, 0.3);
-    --filter-btn-bg: rgba(255, 255, 255, 0.4);
-    --filter-btn-hover: rgba(255, 255, 255, 0.7);
-    --filter-btn-active: #4a9fe0;
-    --filter-btn-text: #0a3153;
     --toggle-bg: rgba(255, 255, 255, 0.6);
-    --toggle-icon: #0a3153;
     --toggle-hover: rgba(255, 255, 255, 0.85);
 }
 
-/* 深色模式（深蓝色系） */
 @media (prefers-color-scheme: dark) {
     :root {
         --bg-start: #0a1a2e;
@@ -41,27 +29,16 @@
         --card-shadow-hover: rgba(40, 100, 180, 0.25);
         --text-primary: #c8dff5;
         --text-secondary: #90b8d8;
-        --text-muted: #6a9fc0;
         --back-btn-bg: rgba(20, 50, 80, 0.7);
         --back-btn-border: rgba(60, 120, 180, 0.3);
-        --divider: rgba(60, 120, 180, 0.25);
         --glow-color: rgba(40, 100, 180, 0.20);
-        --btn-bg: linear-gradient(145deg, #3a8ec0, #1f6a9e);
-        --btn-shadow: rgba(31, 106, 158, 0.5);
-        --btn-shadow-hover: rgba(58, 142, 192, 0.6);
         --card-image-bg: #0d2438;
         --card-body-bg: rgba(10, 30, 50, 0.4);
-        --filter-btn-bg: rgba(20, 50, 80, 0.5);
-        --filter-btn-hover: rgba(40, 80, 120, 0.6);
-        --filter-btn-active: #3a8ec0;
-        --filter-btn-text: #c8dff5;
         --toggle-bg: rgba(20, 50, 80, 0.7);
-        --toggle-icon: #c8dff5;
         --toggle-hover: rgba(40, 80, 120, 0.8);
     }
 }
 
-/* 手动切换：当 body 有 .dark 类时强制深色 */
 body.dark {
     --bg-start: #0a1a2e;
     --bg-end: #162b44;
@@ -71,22 +48,12 @@ body.dark {
     --card-shadow-hover: rgba(40, 100, 180, 0.25);
     --text-primary: #c8dff5;
     --text-secondary: #90b8d8;
-    --text-muted: #6a9fc0;
     --back-btn-bg: rgba(20, 50, 80, 0.7);
     --back-btn-border: rgba(60, 120, 180, 0.3);
-    --divider: rgba(60, 120, 180, 0.25);
     --glow-color: rgba(40, 100, 180, 0.20);
-    --btn-bg: linear-gradient(145deg, #3a8ec0, #1f6a9e);
-    --btn-shadow: rgba(31, 106, 158, 0.5);
-    --btn-shadow-hover: rgba(58, 142, 192, 0.6);
     --card-image-bg: #0d2438;
     --card-body-bg: rgba(10, 30, 50, 0.4);
-    --filter-btn-bg: rgba(20, 50, 80, 0.5);
-    --filter-btn-hover: rgba(40, 80, 120, 0.6);
-    --filter-btn-active: #3a8ec0;
-    --filter-btn-text: #c8dff5;
     --toggle-bg: rgba(20, 50, 80, 0.7);
-    --toggle-icon: #c8dff5;
     --toggle-hover: rgba(40, 80, 120, 0.8);
 }
 
@@ -99,28 +66,16 @@ body.light {
     --card-shadow-hover: rgba(50, 130, 210, 0.30);
     --text-primary: #0a3153;
     --text-secondary: #2c5778;
-    --text-muted: #4a7a9e;
     --back-btn-bg: rgba(255, 255, 255, 0.6);
     --back-btn-border: rgba(255, 255, 255, 0.4);
-    --divider: rgba(160, 200, 240, 0.3);
     --glow-color: rgba(140, 200, 240, 0.25);
-    --btn-bg: linear-gradient(145deg, #4a9fe0, #2b7fc7);
-    --btn-shadow: rgba(43, 127, 199, 0.4);
-    --btn-shadow-hover: rgba(43, 127, 199, 0.55);
     --card-image-bg: #f0f8ff;
     --card-body-bg: rgba(255, 255, 255, 0.3);
-    --filter-btn-bg: rgba(255, 255, 255, 0.4);
-    --filter-btn-hover: rgba(255, 255, 255, 0.7);
-    --filter-btn-active: #4a9fe0;
-    --filter-btn-text: #0a3153;
     --toggle-bg: rgba(255, 255, 255, 0.6);
-    --toggle-icon: #0a3153;
     --toggle-hover: rgba(255, 255, 255, 0.85);
 }
 
-/* ============================================================
-   基础样式
-   ============================================================ */
+/* 基础样式 */
 * {
     margin: 0;
     padding: 0;
@@ -138,9 +93,7 @@ body {
     transition: background 0.4s ease, color 0.3s ease;
 }
 
-/* ============================================================
-   顶部导航栏
-   ============================================================ */
+/* 顶部导航 */
 .header {
     position: relative;
     width: 100%;
@@ -209,6 +162,7 @@ body {
     transition: color 0.3s ease;
 }
 
+/* 主题切换按钮 - 确保可见 */
 .theme-toggle {
     position: absolute;
     right: 0;
@@ -229,6 +183,7 @@ body {
     transition: all 0.2s ease;
     color: var(--text-primary);
     font-size: 1.2rem;
+    z-index: 20; /* 提高层级 */
 }
 
 .theme-toggle:hover {
@@ -242,9 +197,7 @@ body {
     fill: currentColor;
 }
 
-/* ============================================================
-   卡片网格
-   ============================================================ */
+/* 网格 */
 .grid {
     width: 100%;
     max-width: 1200px;
@@ -260,9 +213,7 @@ body {
     -webkit-backdrop-filter: blur(6px);
     border-radius: 28px;
     overflow: hidden;
-    box-shadow:
-        0 12px 28px var(--card-shadow),
-        inset 0 1px 2px rgba(255, 255, 255, 0.7);
+    box-shadow: 0 12px 28px var(--card-shadow), inset 0 1px 2px rgba(255, 255, 255, 0.7);
     border: 1px solid var(--card-border);
     transition: transform 0.25s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
     display: flex;
@@ -273,9 +224,7 @@ body {
 
 .card:hover {
     transform: translateY(-6px);
-    box-shadow:
-        0 20px 40px var(--card-shadow-hover),
-        inset 0 1px 2px rgba(255, 255, 255, 0.7);
+    box-shadow: 0 20px 40px var(--card-shadow-hover), inset 0 1px 2px rgba(255, 255, 255, 0.7);
 }
 
 .card-image {
@@ -341,9 +290,7 @@ body {
     color: inherit;
 }
 
-/* ============================================================
-   响应式
-   ============================================================ */
+/* 响应式 */
 @media (max-width: 992px) {
     .grid {
         grid-template-columns: repeat(2, 1fr);
@@ -356,14 +303,12 @@ body {
         grid-template-columns: 1fr;
         gap: 18px;
     }
-
     .header {
         padding: 10px 0 20px;
         flex-direction: column;
         align-items: center;
         gap: 10px;
     }
-
     .back-btn {
         position: static;
         transform: none;
@@ -373,17 +318,19 @@ body {
     .back-btn:hover {
         transform: none;
     }
-
+    /* 小屏下按钮放在标题右侧，不占位 */
     .theme-toggle {
-        position: static;
+        position: relative;
+        right: auto;
+        top: auto;
         transform: none;
         align-self: flex-end;
         margin-top: -44px;
+        margin-right: 0;
     }
     .theme-toggle:hover {
         transform: scale(1.08);
     }
-
     .page-title {
         font-size: 1.8rem;
     }
@@ -399,9 +346,7 @@ body {
     }
 }
 
-/* ============================================================
-   底部装饰光晕
-   ============================================================ */
+/* 底部装饰光晕 */
 body::after {
     content: '';
     position: fixed;

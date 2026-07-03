@@ -8,14 +8,19 @@
 </head>
 <body>
     <header class="header">
+        <!-- 返回按钮 -->
         <a href="../" class="back-btn">
             <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
             返回
         </a>
+
+        <!-- 标题 -->
         <div class="title-wrapper">
             <img class="title-icon" src="../image/zhuzi.png" alt="竹子图标" />
             <h1 class="page-title">空间</h1>
         </div>
+
+        <!-- 主题切换按钮（确保存在） -->
         <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
             <svg viewBox="0 0 24 24" id="themeIcon">
                 <path d="M12 3a9 9 0 1 0 9 9 9 9 0 0 0-9-9zm0 16a7 7 0 1 1 7-7 7 7 0 0 1-7 7z"/>
@@ -25,6 +30,7 @@
     </header>
 
     <div class="grid">
+        <!-- 卡片 -->
         <a class="card-link" href="./zhuziwin32/">
             <div class="card">
                 <div class="card-image">
@@ -49,6 +55,7 @@
         </a>
     </div>
 
+    <!-- 主题切换脚本 -->
     <script>
         (function() {
             const toggleBtn = document.getElementById('themeToggle');
