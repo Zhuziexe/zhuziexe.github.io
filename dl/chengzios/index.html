@@ -15,22 +15,22 @@
             min-height: 100vh;
             background: linear-gradient(145deg, #e6f3ff 0%, #b3d9f5 100%);
             font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-            padding: 40px 0;               /* 上下留白 */
+            padding: 40px 0;
             display: flex;
             justify-content: center;
         }
 
-        /* ----- 卡片：左右各留 50px，可滚动 ----- */
+        /* ----- 卡片：无 overflow:hidden，让按钮阴影完整显示 ----- */
         .card-container {
-            width: calc(100% - 100px);       /* 左右各 50px */
+            width: calc(100% - 100px);
             max-width: 1400px;
             background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-radius: 40px;
             box-shadow: 0 30px 60px rgba(50, 130, 210, 0.30);
-            border: none;                    /* 彻底移除边框 */
-            overflow: hidden;
+            border: none;
+            /* 去掉 overflow: hidden;  （默认为 visible） */
             display: flex;
             flex-direction: column;
             padding: 30px 40px;
@@ -79,10 +79,10 @@
             flex-direction: column;
             flex-shrink: 0;
             position: relative;
-            padding: 8px 0 16px 60px;   /* 为箭头留空间 */
+            padding: 8px 0 16px 60px;
             border-bottom: 2px solid rgba(160, 200, 240, 0.3);
             margin-bottom: 18px;
-            overflow: hidden;
+            /* 无需 overflow:hidden，避免裁剪标题文字 */;
         }
 
         .title-group {
@@ -90,7 +90,7 @@
             flex-direction: column;
             align-items: flex-start;
             gap: 4px;
-            max-width: calc(100% - 150px);   /* 为下载按钮留出足够空间 */
+            max-width: calc(100% - 150px);
             padding-right: 20px;
         }
 
@@ -113,11 +113,11 @@
             margin: 0;
         }
 
-        /* ----- 下载按钮（右上角，不再贴边） ----- */
+        /* ----- 下载按钮（右上角，仍有偏移避免紧贴边缘） ----- */
         .download-btn {
             position: absolute;
-            top: 16px;           /* 距顶部 16px，避免阴影被裁剪 */
-            right: 16px;         /* 距右侧 16px */
+            top: 16px;
+            right: 16px;
             display: inline-block;
             padding: 12px 32px;
             background: linear-gradient(145deg, #4a9fe0, #2b7fc7);
@@ -144,12 +144,12 @@
             transform: scale(0.96);
         }
 
-        /* ----- 图片区域（底部） ----- */
+        /* ----- 图片区域（内部保留 overflow:hidden，避免图片溢出圆角） ----- */
         .card-image-wrapper {
             flex: 1;
             min-height: 200px;
             border-radius: 20px;
-            overflow: hidden;
+            overflow: hidden;          /* 保留裁剪，防止图片溢出圆角 */
             background: rgba(200, 225, 245, 0.3);
             display: flex;
             align-items: center;
@@ -176,8 +176,8 @@
             .card-container {
                 padding: 20px 20px 20px 20px;
                 border-radius: 28px;
-                width: calc(100% - 40px);   /* 左右各 20px */
-                border: none;               /* 确保无边框 */
+                width: calc(100% - 40px);
+                border: none;
                 box-shadow: 0 30px 60px rgba(50, 130, 210, 0.30);
             }
 
@@ -215,7 +215,7 @@
             .card-container {
                 padding: 14px 14px 12px 14px;
                 border-radius: 24px;
-                width: calc(100% - 32px);   /* 左右各 16px */
+                width: calc(100% - 32px);
                 border: none;
                 box-shadow: 0 30px 60px rgba(50, 130, 210, 0.30);
             }
