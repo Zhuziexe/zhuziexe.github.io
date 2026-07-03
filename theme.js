@@ -36,9 +36,15 @@
                     </g>
                 `;
             } else {
-                // 🌙 弯弯的新月（浅色模式用，点击切换到深色）
+                // 🌙 弯月牙（浅色模式用，点击切换到深色）
+                // 使用描边轮廓，不填充，显得轻盈
                 icon.innerHTML = `
-                    <path d="M12 2A9 9 0 0 0 3 11a9 9 0 0 0 9 9 9 9 0 0 0 0-18z" fill="currentColor"/>
+                    <path d="M12 2a9 9 0 1 0 9 9 9 9 0 0 1-9-9z" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          stroke-width="2" 
+                          stroke-linecap="round" 
+                          stroke-linejoin="round"/>
                 `;
             }
         }
@@ -57,7 +63,7 @@
         applyTheme(newTheme);
     }
 
-    // 监听系统主题变化
+    // 监听系统主题变化（仅当用户未手动设置时）
     const systemMedia = window.matchMedia('(prefers-color-scheme: dark)');
     systemMedia.addEventListener('change', function(e) {
         if (!localStorage.getItem(STORAGE_KEY)) {
@@ -65,8 +71,10 @@
         }
     });
 
+    // 初始化
     applyTheme(getPreferredTheme());
 
+    // 绑定切换按钮
     const toggleBtn = document.getElementById('themeToggle');
     if (toggleBtn) {
         toggleBtn.addEventListener('click', toggleTheme);
