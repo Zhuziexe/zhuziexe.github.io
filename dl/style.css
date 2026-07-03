@@ -1,81 +1,4 @@
-/* ============================================================
-   CSS 变量（浅色 / 深色）
-   ============================================================ */
-:root {
-    --bg-start: #e6f3ff;
-    --bg-end: #b3d9f5;
-    --card-bg: rgba(255, 255, 255, 0.75);
-    --card-border: rgba(255, 255, 255, 0.4);
-    --card-shadow: rgba(70, 150, 220, 0.20);
-    --card-shadow-hover: rgba(50, 130, 210, 0.30);
-    --text-primary: #0a3153;
-    --text-secondary: #2c5778;
-    --back-btn-bg: rgba(255, 255, 255, 0.6);
-    --back-btn-border: rgba(255, 255, 255, 0.4);
-    --glow-color: rgba(140, 200, 240, 0.25);
-    --card-image-bg: #f0f8ff;
-    --card-body-bg: rgba(255, 255, 255, 0.3);
-    --toggle-bg: rgba(255, 255, 255, 0.6);
-    --toggle-hover: rgba(255, 255, 255, 0.85);
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-start: #0a1a2e;
-        --bg-end: #162b44;
-        --card-bg: rgba(20, 40, 65, 0.85);
-        --card-border: rgba(60, 120, 180, 0.25);
-        --card-shadow: rgba(0, 20, 40, 0.40);
-        --card-shadow-hover: rgba(40, 100, 180, 0.25);
-        --text-primary: #c8dff5;
-        --text-secondary: #90b8d8;
-        --back-btn-bg: rgba(20, 50, 80, 0.7);
-        --back-btn-border: rgba(60, 120, 180, 0.3);
-        --glow-color: rgba(40, 100, 180, 0.20);
-        --card-image-bg: #0d2438;
-        --card-body-bg: rgba(10, 30, 50, 0.4);
-        --toggle-bg: rgba(20, 50, 80, 0.7);
-        --toggle-hover: rgba(40, 80, 120, 0.8);
-    }
-}
-
-body.dark {
-    --bg-start: #0a1a2e;
-    --bg-end: #162b44;
-    --card-bg: rgba(20, 40, 65, 0.85);
-    --card-border: rgba(60, 120, 180, 0.25);
-    --card-shadow: rgba(0, 20, 40, 0.40);
-    --card-shadow-hover: rgba(40, 100, 180, 0.25);
-    --text-primary: #c8dff5;
-    --text-secondary: #90b8d8;
-    --back-btn-bg: rgba(20, 50, 80, 0.7);
-    --back-btn-border: rgba(60, 120, 180, 0.3);
-    --glow-color: rgba(40, 100, 180, 0.20);
-    --card-image-bg: #0d2438;
-    --card-body-bg: rgba(10, 30, 50, 0.4);
-    --toggle-bg: rgba(20, 50, 80, 0.7);
-    --toggle-hover: rgba(40, 80, 120, 0.8);
-}
-
-body.light {
-    --bg-start: #e6f3ff;
-    --bg-end: #b3d9f5;
-    --card-bg: rgba(255, 255, 255, 0.75);
-    --card-border: rgba(255, 255, 255, 0.4);
-    --card-shadow: rgba(70, 150, 220, 0.20);
-    --card-shadow-hover: rgba(50, 130, 210, 0.30);
-    --text-primary: #0a3153;
-    --text-secondary: #2c5778;
-    --back-btn-bg: rgba(255, 255, 255, 0.6);
-    --back-btn-border: rgba(255, 255, 255, 0.4);
-    --glow-color: rgba(140, 200, 240, 0.25);
-    --card-image-bg: #f0f8ff;
-    --card-body-bg: rgba(255, 255, 255, 0.3);
-    --toggle-bg: rgba(255, 255, 255, 0.6);
-    --toggle-hover: rgba(255, 255, 255, 0.85);
-}
-
-/* 基础样式 */
+/* ===== 空间页专属布局 ===== */
 * {
     margin: 0;
     padding: 0;
@@ -90,10 +13,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: background 0.4s ease, color 0.3s ease;
+    transition: background 0.4s ease;
 }
 
-/* 顶部导航 */
 .header {
     position: relative;
     width: 100%;
@@ -131,7 +53,6 @@ body {
     box-shadow: 0 6px 20px rgba(43, 127, 199, 0.25);
     transform: translateY(-50%) scale(1.02);
 }
-
 .back-btn svg {
     width: 20px;
     height: 20px;
@@ -162,7 +83,6 @@ body {
     transition: color 0.3s ease;
 }
 
-/* 主题切换按钮 - 确保可见 */
 .theme-toggle {
     position: absolute;
     right: 0;
@@ -182,22 +102,19 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
     color: var(--text-primary);
-    font-size: 1.2rem;
-    z-index: 20; /* 提高层级 */
+    z-index: 20;
 }
 
 .theme-toggle:hover {
     background: var(--toggle-hover);
     transform: translateY(-50%) scale(1.08);
 }
-
 .theme-toggle svg {
     width: 24px;
     height: 24px;
     fill: currentColor;
 }
 
-/* 网格 */
 .grid {
     width: 100%;
     max-width: 1200px;
@@ -245,7 +162,6 @@ body {
     object-fit: cover;
     transition: transform 0.3s ease;
 }
-
 .card:hover .card-image img {
     transform: scale(1.03);
 }
@@ -290,63 +206,6 @@ body {
     color: inherit;
 }
 
-/* 响应式 */
-@media (max-width: 992px) {
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-}
-
-@media (max-width: 576px) {
-    .grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
-    }
-    .header {
-        padding: 10px 0 20px;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-    .back-btn {
-        position: static;
-        transform: none;
-        align-self: flex-start;
-        margin-bottom: 6px;
-    }
-    .back-btn:hover {
-        transform: none;
-    }
-    /* 小屏下按钮放在标题右侧，不占位 */
-    .theme-toggle {
-        position: relative;
-        right: auto;
-        top: auto;
-        transform: none;
-        align-self: flex-end;
-        margin-top: -44px;
-        margin-right: 0;
-    }
-    .theme-toggle:hover {
-        transform: scale(1.08);
-    }
-    .page-title {
-        font-size: 1.8rem;
-    }
-    .title-icon {
-        width: 36px;
-        height: 36px;
-    }
-    .card {
-        height: 340px;
-    }
-    .card-image {
-        height: 170px;
-    }
-}
-
-/* 底部装饰光晕 */
 body::after {
     content: '';
     position: fixed;
@@ -359,4 +218,21 @@ body::after {
     pointer-events: none;
     z-index: -1;
     transition: background 0.4s ease;
+}
+
+/* 响应式 */
+@media (max-width: 992px) {
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+}
+@media (max-width: 576px) {
+    .grid { grid-template-columns: 1fr; gap: 18px; }
+    .header { padding: 10px 0 20px; flex-direction: column; align-items: center; gap: 10px; }
+    .back-btn { position: static; transform: none; align-self: flex-start; margin-bottom: 6px; }
+    .back-btn:hover { transform: none; }
+    .theme-toggle { position: relative; right: auto; top: auto; transform: none; align-self: flex-end; margin-top: -44px; }
+    .theme-toggle:hover { transform: scale(1.08); }
+    .page-title { font-size: 1.8rem; }
+    .title-icon { width: 36px; height: 36px; }
+    .card { height: 340px; }
+    .card-image { height: 170px; }
 }

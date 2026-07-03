@@ -1,11 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>竹子 · 主页</title>
+    <link rel="stylesheet" href="./theme.css" />
     <style>
+        /* 主页专用样式 */
         * {
             margin: 0;
             padding: 0;
@@ -17,25 +18,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(145deg, #e6f3ff 0%, #b3d9f5 100%);
+            background: linear-gradient(145deg, var(--bg-start), var(--bg-end));
             font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
             padding: 20px;
+            transition: background 0.4s ease;
         }
 
         .card {
             max-width: 480px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.75);
+            background: var(--card-bg);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             border-radius: 40px;
             padding: 40px 35px 45px;
-            box-shadow:
-                0 25px 50px -12px rgba(70, 150, 220, 0.35),
-                inset 0 2px 4px rgba(255, 255, 255, 0.7),
-                0 0 0 1px rgba(180, 215, 245, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            transition: transform 0.25s ease, box-shadow 0.3s ease;
+            box-shadow: 0 25px 50px -12px var(--card-shadow), inset 0 2px 4px rgba(255, 255, 255, 0.7), 0 0 0 1px var(--card-border);
+            border: 1px solid var(--card-border);
+            transition: transform 0.25s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -43,14 +42,10 @@
 
         .card:hover {
             transform: translateY(-4px);
-            box-shadow:
-                0 30px 60px -15px rgba(50, 130, 210, 0.45),
-                inset 0 2px 4px rgba(255, 255, 255, 0.7),
-                0 0 0 1px rgba(160, 200, 240, 0.6);
+            box-shadow: 0 30px 60px -15px var(--card-shadow-hover), inset 0 2px 4px rgba(255, 255, 255, 0.7), 0 0 0 1px var(--card-border);
         }
 
-        /* 装饰光晕 */
-        .card .glow {
+        .glow {
             position: absolute;
             top: -60%;
             left: -30%;
@@ -78,7 +73,6 @@
             top: -30px;
             right: -20px;
         }
-
         .card::after {
             width: 100px;
             height: 100px;
@@ -87,7 +81,6 @@
             left: -20px;
         }
 
-        /* 标题区域 */
         .title-wrapper {
             display: flex;
             align-items: center;
@@ -96,6 +89,7 @@
             margin-bottom: 32px;
             position: relative;
             z-index: 1;
+            padding-right: 48px;
         }
 
         .title-icon {
@@ -109,15 +103,15 @@
         .card-title {
             font-size: 2.4rem;
             font-weight: 700;
-            color: #0a3153;
+            color: var(--text-primary);
             letter-spacing: 2px;
             text-shadow: 0 2px 4px rgba(255, 255, 255, 0.6);
             margin: 0;
             line-height: 1.2;
+            transition: color 0.3s ease;
         }
 
-        /* ===== 按钮容器（垂直排列） ===== */
-        .button-group {
+        .btn-group {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -126,20 +120,17 @@
             z-index: 1;
         }
 
-        /* ----- 进入空间按钮（固定宽度） ----- */
         .btn {
             display: block;
-            width: 260px;                /* 固定宽度，方便扩展 */
+            width: 260px;
             padding: 14px 0;
-            background: linear-gradient(145deg, #4a9fe0, #2b7fc7);
+            background: var(--btn-bg);
             color: #fff;
             font-size: 1.2rem;
             font-weight: 600;
             text-decoration: none;
             border-radius: 60px;
-            box-shadow:
-                0 8px 24px rgba(43, 127, 199, 0.4),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 24px var(--btn-shadow), inset 0 2px 4px rgba(255, 255, 255, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.3);
             transition: all 0.25s ease;
             letter-spacing: 0.8px;
@@ -148,32 +139,25 @@
         }
 
         .btn:hover {
-            background: linear-gradient(145deg, #5cb0f0, #2f8ad4);
-            box-shadow:
-                0 12px 32px rgba(43, 127, 199, 0.55),
-                inset 0 2px 4px rgba(255, 255, 255, 0.4);
+            box-shadow: 0 12px 32px var(--btn-shadow-hover), inset 0 2px 4px rgba(255, 255, 255, 0.4);
             transform: scale(1.02) translateY(-2px);
         }
 
         .btn:active {
             transform: scale(0.97);
-            box-shadow: 0 4px 12px rgba(43, 127, 199, 0.3);
         }
 
-        /* ----- B站主页按钮（不同宽度，蓝色调） ----- */
         .b-btn {
             display: block;
-            width: 220px;                /* 与 .btn 宽度不同 */
+            width: 220px;
             padding: 12px 0;
-            background: linear-gradient(145deg, #5b9bd5, #3a7dc2);  /* 稍浅的蓝，美观 */
+            background: linear-gradient(145deg, #5b9bd5, #3a7dc2);
             color: #fff;
             font-size: 1.05rem;
             font-weight: 600;
             text-decoration: none;
             border-radius: 60px;
-            box-shadow:
-                0 6px 20px rgba(58, 125, 194, 0.35),
-                inset 0 2px 4px rgba(255, 255, 255, 0.25);
+            box-shadow: 0 6px 20px rgba(58, 125, 194, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.25);
             border: 1px solid rgba(255, 255, 255, 0.25);
             transition: all 0.25s ease;
             letter-spacing: 0.6px;
@@ -183,56 +167,69 @@
 
         .b-btn:hover {
             background: linear-gradient(145deg, #6ea8e0, #4685cc);
-            box-shadow:
-                0 10px 28px rgba(58, 125, 194, 0.5),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 28px rgba(58, 125, 194, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.3);
             transform: scale(1.02) translateY(-2px);
         }
-
         .b-btn:active {
             transform: scale(0.97);
-            box-shadow: 0 4px 12px rgba(58, 125, 194, 0.3);
         }
 
-        /* 响应式调整 */
+        /* 主题切换按钮（右上角） */
+        .theme-toggle {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--back-btn-bg);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid var(--back-btn-border);
+            box-shadow: 0 4px 12px rgba(43, 127, 199, 0.15);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-primary);
+        }
+
+        .theme-toggle:hover {
+            background: var(--toggle-hover);
+            transform: scale(1.08);
+        }
+
+        .theme-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
         @media (max-width: 480px) {
-            .card {
-                padding: 30px 20px 35px;
-                border-radius: 30px;
-            }
-
-            .title-wrapper {
-                gap: 10px;
-                margin-bottom: 28px;
-            }
-
-            .title-icon {
-                width: 40px;
-                height: 40px;
-            }
-
-            .card-title {
-                font-size: 2rem;
-            }
-
-            .btn {
-                width: 220px;            /* 小屏适当缩小 */
-                font-size: 1rem;
-                padding: 12px 0;
-            }
-
-            .b-btn {
-                width: 190px;
-                font-size: 0.95rem;
-                padding: 10px 0;
-            }
+            .card { padding: 30px 20px 35px; border-radius: 30px; }
+            .title-wrapper { gap: 10px; margin-bottom: 28px; padding-right: 40px; }
+            .title-icon { width: 40px; height: 40px; }
+            .card-title { font-size: 2rem; }
+            .btn { width: 220px; font-size: 1rem; padding: 12px 0; }
+            .b-btn { width: 190px; font-size: 0.95rem; padding: 10px 0; }
+            .theme-toggle { top: 18px; right: 18px; width: 38px; height: 38px; }
+            .theme-toggle svg { width: 20px; height: 20px; }
         }
     </style>
 </head>
 <body>
     <div class="card">
-        <!-- 装饰光晕 -->
         <div class="glow"></div>
+
+        <!-- 主题切换按钮 -->
+        <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+            <svg viewBox="0 0 24 24" id="themeIcon">
+                <path d="M12 3a9 9 0 1 0 9 9 9 9 0 0 0-9-9zm0 16a7 7 0 1 1 7-7 7 7 0 0 1-7 7z"/>
+                <path d="M12 5v2M12 17v2M7.05 7.05l1.41 1.41M15.54 15.54l1.41 1.41M5 12h2M17 12h2M7.05 16.95l1.41-1.41M15.54 8.46l1.41-1.41"/>
+            </svg>
+        </button>
 
         <!-- 标题区 -->
         <div class="title-wrapper">
@@ -241,15 +238,12 @@
         </div>
 
         <!-- 按钮组 -->
-        <div class="button-group">
-            <!-- 进入空间按钮（固定宽度） -->
+        <div class="btn-group">
             <a href="./dl/" class="btn">进入空间</a>
-            <!-- B站主页按钮（不同宽度，放在最下面） -->
-            <a href="https://space.bilibili.com/3707020345608714"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="b-btn">B站主页</a>
+            <a href="https://space.bilibili.com/3707020345608714" target="_blank" rel="noopener noreferrer" class="b-btn">B站主页</a>
         </div>
     </div>
+
+    <script src="./theme.js"></script>
 </body>
 </html>

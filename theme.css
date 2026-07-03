@@ -1,0 +1,90 @@
+/* ========== 主题变量 ========== */
+:root {
+    /* 浅色模式 */
+    --bg-start: #e6f3ff;
+    --bg-end: #b3d9f5;
+    --card-bg: rgba(255, 255, 255, 0.75);
+    --card-border: rgba(255, 255, 255, 0.4);
+    --card-shadow: rgba(70, 150, 220, 0.20);
+    --card-shadow-hover: rgba(50, 130, 210, 0.30);
+    --text-primary: #0a3153;
+    --text-secondary: #2c5778;
+    --back-btn-bg: rgba(255, 255, 255, 0.6);
+    --back-btn-border: rgba(255, 255, 255, 0.4);
+    --glow-color: rgba(140, 200, 240, 0.25);
+    --card-image-bg: #f0f8ff;
+    --card-body-bg: rgba(255, 255, 255, 0.3);
+    --toggle-bg: rgba(255, 255, 255, 0.6);
+    --toggle-hover: rgba(255, 255, 255, 0.85);
+    --btn-bg: linear-gradient(145deg, #4a9fe0, #2b7fc7);
+    --btn-shadow: rgba(43, 127, 199, 0.4);
+    --btn-shadow-hover: rgba(43, 127, 199, 0.55);
+}
+
+/* 系统深色模式 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-start: #0a1a2e;
+        --bg-end: #162b44;
+        --card-bg: rgba(20, 40, 65, 0.85);
+        --card-border: rgba(60, 120, 180, 0.25);
+        --card-shadow: rgba(0, 20, 40, 0.40);
+        --card-shadow-hover: rgba(40, 100, 180, 0.25);
+        --text-primary: #c8dff5;
+        --text-secondary: #90b8d8;
+        --back-btn-bg: rgba(20, 50, 80, 0.7);
+        --back-btn-border: rgba(60, 120, 180, 0.3);
+        --glow-color: rgba(40, 100, 180, 0.20);
+        --card-image-bg: #0d2438;
+        --card-body-bg: rgba(10, 30, 50, 0.4);
+        --toggle-bg: rgba(20, 50, 80, 0.7);
+        --toggle-hover: rgba(40, 80, 120, 0.8);
+        --btn-bg: linear-gradient(145deg, #3a8ec0, #1f6a9e);
+        --btn-shadow: rgba(31, 106, 158, 0.5);
+        --btn-shadow-hover: rgba(58, 142, 192, 0.6);
+    }
+}
+
+/* 手动强制深色 */
+body.dark {
+    --bg-start: #0a1a2e;
+    --bg-end: #162b44;
+    --card-bg: rgba(20, 40, 65, 0.85);
+    --card-border: rgba(60, 120, 180, 0.25);
+    --card-shadow: rgba(0, 20, 40, 0.40);
+    --card-shadow-hover: rgba(40, 100, 180, 0.25);
+    --text-primary: #c8dff5;
+    --text-secondary: #90b8d8;
+    --back-btn-bg: rgba(20, 50, 80, 0.7);
+    --back-btn-border: rgba(60, 120, 180, 0.3);
+    --glow-color: rgba(40, 100, 180, 0.20);
+    --card-image-bg: #0d2438;
+    --card-body-bg: rgba(10, 30, 50, 0.4);
+    --toggle-bg: rgba(20, 50, 80, 0.7);
+    --toggle-hover: rgba(40, 80, 120, 0.8);
+    --btn-bg: linear-gradient(145deg, #3a8ec0, #1f6a9e);
+    --btn-shadow: rgba(31, 106, 158, 0.5);
+    --btn-shadow-hover: rgba(58, 142, 192, 0.6);
+}
+
+/* 手动强制浅色 */
+body.light {
+    --bg-start: #e6f3ff;
+    --bg-end: #b3d9f5;
+    --card-bg: rgba(255, 255, 255, 0.75);
+    --card-border: rgba(255, 255, 255, 0.4);
+    --card-shadow: rgba(70, 150, 220, 0.20);
+    --card-shadow-hover: rgba(50, 130, 210, 0.30);
+    --text-primary: #0a3153;
+    --text-secondary: #2c5778;
+    --back-btn-bg: rgba(255, 255, 255, 0.6);
+    --back-btn-border: rgba(255, 255, 255, 0.4);
+    --glow-color: rgba(140, 200, 240, 0.25);
+    --card-image-bg: #f0f8ff;
+    --card-body-bg: rgba(255, 255, 255, 0.3);
+    --toggle-bg: rgba(255, 255, 255, 0.6);
+    --toggle-hover: rgba(255, 255, 255, 0.85);
+    --btn-bg: linear-gradient(145deg, #4a9fe0, #2b7fc7);
+    --btn-shadow: rgba(43, 127, 199, 0.4);
+    --btn-shadow-hover: rgba(43, 127, 199, 0.55);
+}
