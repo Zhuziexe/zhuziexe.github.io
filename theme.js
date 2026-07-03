@@ -1,5 +1,5 @@
 /**
- * 主题切换核心逻辑（图标：浅色=月亮，深色=太阳）
+ * 主题切换核心逻辑（图标：浅色=弯月，深色=太阳）
  */
 (function() {
     const body = document.body;
@@ -17,11 +17,11 @@
             body.classList.add('light');
         }
 
-        // 更新图标（如果存在）
+        // 更新图标
         const icon = document.getElementById('themeIcon');
         if (icon) {
             if (theme === 'dark') {
-                // ☀️ 深色模式下显示太阳（点击可切换到浅色）
+                // ☀️ 太阳（深色模式用，点击切换到浅色）
                 icon.innerHTML = `
                     <circle cx="12" cy="12" r="5"/>
                     <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -36,9 +36,9 @@
                     </g>
                 `;
             } else {
-                // 🌙 浅色模式下显示弯月
+                // 🌙 弯弯的新月（浅色模式用，点击切换到深色）
                 icon.innerHTML = `
-                    <path d="M12 2A10 10 0 1 0 22 12 9 9 0 0 1 12 2z"/>
+                    <path d="M12 2A9 9 0 0 0 3 11a9 9 0 0 0 9 9 9 9 0 0 0 0-18z" fill="currentColor"/>
                 `;
             }
         }
@@ -57,7 +57,7 @@
         applyTheme(newTheme);
     }
 
-    // 监听系统主题变化（仅当用户未手动设置时）
+    // 监听系统主题变化
     const systemMedia = window.matchMedia('(prefers-color-scheme: dark)');
     systemMedia.addEventListener('change', function(e) {
         if (!localStorage.getItem(STORAGE_KEY)) {
@@ -65,10 +65,8 @@
         }
     });
 
-    // 初始化
     applyTheme(getPreferredTheme());
 
-    // 绑定按钮
     const toggleBtn = document.getElementById('themeToggle');
     if (toggleBtn) {
         toggleBtn.addEventListener('click', toggleTheme);
