@@ -1,89 +1,134 @@
-/* ========== 主题变量 ========== */
+/* ============================================================
+   🌗 全局主题变量（浅色 / 深色）
+   所有页面统一引用此文件，通过 CSS 变量切换主题
+   ============================================================ */
+
+/* ---------- 浅色模式（默认） ---------- */
 :root {
-    /* 浅色模式 */
+    /* 背景 */
     --bg-start: #e6f3ff;
     --bg-end: #b3d9f5;
+
+    /* 卡片 */
     --card-bg: rgba(255, 255, 255, 0.75);
     --card-border: rgba(255, 255, 255, 0.4);
     --card-shadow: rgba(70, 150, 220, 0.20);
     --card-shadow-hover: rgba(50, 130, 210, 0.30);
+
+    /* 文本 */
     --text-primary: #0a3153;
     --text-secondary: #2c5778;
+
+    /* 按钮与交互 */
     --back-btn-bg: rgba(255, 255, 255, 0.6);
     --back-btn-border: rgba(255, 255, 255, 0.4);
-    --glow-color: rgba(140, 200, 240, 0.25);
-    --card-image-bg: #f0f8ff;
-    --card-body-bg: rgba(255, 255, 255, 0.3);
     --toggle-bg: rgba(255, 255, 255, 0.6);
     --toggle-hover: rgba(255, 255, 255, 0.85);
+
+    /* 分割线 */
+    --divider: rgba(160, 200, 240, 0.3);
+
+    /* 装饰光晕 */
+    --glow-color: rgba(140, 200, 240, 0.25);
+
+    /* 图片占位背景 */
+    --card-image-bg: #f0f8ff;
+    --card-body-bg: rgba(255, 255, 255, 0.3);
+
+    /* 下载/主要按钮 */
     --btn-bg: linear-gradient(145deg, #4a9fe0, #2b7fc7);
     --btn-shadow: rgba(43, 127, 199, 0.4);
     --btn-shadow-hover: rgba(43, 127, 199, 0.55);
 }
 
-/* 系统深色模式 */
+/* ---------- 深色模式（跟随系统） ---------- */
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-start: #1a3050;
---bg-end: #2a4a6a;
+        --bg-start: #1a3050;      /* 更亮的深蓝，避免纯黑感 */
+        --bg-end: #2a4a6a;
+
         --card-bg: rgba(20, 40, 65, 0.85);
         --card-border: rgba(60, 120, 180, 0.25);
         --card-shadow: rgba(0, 20, 40, 0.40);
         --card-shadow-hover: rgba(40, 100, 180, 0.25);
+
         --text-primary: #c8dff5;
         --text-secondary: #90b8d8;
+
         --back-btn-bg: rgba(20, 50, 80, 0.7);
         --back-btn-border: rgba(60, 120, 180, 0.3);
-        --glow-color: rgba(40, 100, 180, 0.20);
-        --card-image-bg: #0d2438;
-        --card-body-bg: rgba(10, 30, 50, 0.4);
         --toggle-bg: rgba(20, 50, 80, 0.7);
         --toggle-hover: rgba(40, 80, 120, 0.8);
+
+        --divider: rgba(60, 120, 180, 0.25);
+
+        --glow-color: rgba(40, 100, 180, 0.20);
+
+        --card-image-bg: #0d2438;
+        --card-body-bg: rgba(10, 30, 50, 0.4);
+
         --btn-bg: linear-gradient(145deg, #3a8ec0, #1f6a9e);
         --btn-shadow: rgba(31, 106, 158, 0.5);
         --btn-shadow-hover: rgba(58, 142, 192, 0.6);
     }
 }
 
-/* 手动强制深色 */
+/* ---------- 手动强制深色（通过 body.dark 类） ---------- */
 body.dark {
-    ---bg-start: #1a3050;
---bg-end: #2a4a6a;
+    --bg-start: #1a3050;
+    --bg-end: #2a4a6a;
+
     --card-bg: rgba(20, 40, 65, 0.85);
     --card-border: rgba(60, 120, 180, 0.25);
     --card-shadow: rgba(0, 20, 40, 0.40);
     --card-shadow-hover: rgba(40, 100, 180, 0.25);
+
     --text-primary: #c8dff5;
     --text-secondary: #90b8d8;
+
     --back-btn-bg: rgba(20, 50, 80, 0.7);
     --back-btn-border: rgba(60, 120, 180, 0.3);
-    --glow-color: rgba(40, 100, 180, 0.20);
-    --card-image-bg: #0d2438;
-    --card-body-bg: rgba(10, 30, 50, 0.4);
     --toggle-bg: rgba(20, 50, 80, 0.7);
     --toggle-hover: rgba(40, 80, 120, 0.8);
+
+    --divider: rgba(60, 120, 180, 0.25);
+
+    --glow-color: rgba(40, 100, 180, 0.20);
+
+    --card-image-bg: #0d2438;
+    --card-body-bg: rgba(10, 30, 50, 0.4);
+
     --btn-bg: linear-gradient(145deg, #3a8ec0, #1f6a9e);
     --btn-shadow: rgba(31, 106, 158, 0.5);
     --btn-shadow-hover: rgba(58, 142, 192, 0.6);
 }
 
-/* 手动强制浅色 */
+/* ---------- 手动强制浅色（通过 body.light 类） ---------- */
 body.light {
+    /* 与 :root 浅色一致，用于覆盖系统深色 */
     --bg-start: #e6f3ff;
     --bg-end: #b3d9f5;
+
     --card-bg: rgba(255, 255, 255, 0.75);
     --card-border: rgba(255, 255, 255, 0.4);
     --card-shadow: rgba(70, 150, 220, 0.20);
     --card-shadow-hover: rgba(50, 130, 210, 0.30);
+
     --text-primary: #0a3153;
     --text-secondary: #2c5778;
+
     --back-btn-bg: rgba(255, 255, 255, 0.6);
     --back-btn-border: rgba(255, 255, 255, 0.4);
-    --glow-color: rgba(140, 200, 240, 0.25);
-    --card-image-bg: #f0f8ff;
-    --card-body-bg: rgba(255, 255, 255, 0.3);
     --toggle-bg: rgba(255, 255, 255, 0.6);
     --toggle-hover: rgba(255, 255, 255, 0.85);
+
+    --divider: rgba(160, 200, 240, 0.3);
+
+    --glow-color: rgba(140, 200, 240, 0.25);
+
+    --card-image-bg: #f0f8ff;
+    --card-body-bg: rgba(255, 255, 255, 0.3);
+
     --btn-bg: linear-gradient(145deg, #4a9fe0, #2b7fc7);
     --btn-shadow: rgba(43, 127, 199, 0.4);
     --btn-shadow-hover: rgba(43, 127, 199, 0.55);
