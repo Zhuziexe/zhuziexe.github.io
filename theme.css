@@ -45,7 +45,7 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --bg-start: #1a3050;      /* 更亮的深蓝，避免纯黑感 */
-        --bg-end: #2a4a6a;
+        --bg-end: #102040;
 
         --card-bg: rgba(20, 40, 65, 0.85);
         --card-border: rgba(60, 120, 180, 0.25);
@@ -76,7 +76,7 @@
 /* ---------- 手动强制深色（通过 body.dark 类） ---------- */
 body.dark {
     --bg-start: #1a3050;
-    --bg-end: #2a4a6a;
+    --bg-end: #102040;
 
     --card-bg: rgba(20, 40, 65, 0.85);
     --card-border: rgba(60, 120, 180, 0.25);
