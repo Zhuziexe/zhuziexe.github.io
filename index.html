@@ -23,62 +23,133 @@
             transition: background 0.4s ease;
             position: relative;
             overflow: hidden;
-            /* ★ 波浪背景：斜向条纹持续移动 ★ */
-            background: 
-                repeating-linear-gradient(
-                    45deg,
-                    var(--bg-start) 0px,
-                    var(--bg-end) 30px,
-                    var(--bg-start) 60px
-                );
-            background-size: 300% 300%;
-            animation: waveFlow 4s linear infinite;
         }
 
-        /* 波浪流动 */
-        @keyframes waveFlow {
-            0%   { background-position: 0% 0%; }
-            100% { background-position: -100% -100%; }
+        /* ★★★ 波浪背景容器（独立于 body，确保特效不被遮盖） ★★★ */
+        .wave-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            /* 多层波浪叠加 */
+            background:
+                radial-gradient(ellipse at 20% 50%, var(--wave-color1) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, var(--wave-color2) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, var(--wave-color3) 0%, transparent 55%),
+                linear-gradient(145deg, var(--bg-start), var(--bg-end));
+            background-blend-mode: normal, normal, normal, normal;
+            animation: waveMove 8s ease-in-out infinite alternate;
         }
 
-        /* ★ 浮动大光晕（独立于背景，持续漂移） ★ */
+        /* ★★★ 真正的波浪流动 ★★★ */
+        @keyframes waveMove {
+            0% {
+                background-position: 
+                    0% 0%,
+                    0% 0%,
+                    0% 0%,
+                    0% 0%;
+                transform: scale(1);
+            }
+            25% {
+                background-position:
+                    10% 5%,
+                    -5% 10%,
+                    5% -5%,
+                    0% 0%;
+                transform: scale(1.02);
+            }
+            50% {
+                background-position:
+                    -5% 10%,
+                    10% -5%,
+                    -10% 15%,
+                    0% 0%;
+                transform: scale(0.98);
+            }
+            75% {
+                background-position:
+                    15% -5%,
+                    -10% 5%,
+                    5% 10%,
+                    0% 0%;
+                transform: scale(1.03);
+            }
+            100% {
+                background-position:
+                    0% 0%,
+                    0% 0%,
+                    0% 0%,
+                    0% 0%;
+                transform: scale(1);
+            }
+        }
+
+        /* 浅色模式波浪颜色 */
+        :root {
+            --wave-color1: rgba(140, 200, 240, 0.30);
+            --wave-color2: rgba(180, 215, 245, 0.25);
+            --wave-color3: rgba(200, 225, 245, 0.20);
+        }
+
+        /* 深色模式波浪颜色（更明显） */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --wave-color1: rgba(60, 140, 220, 0.35);
+                --wave-color2: rgba(40, 120, 200, 0.30);
+                --wave-color3: rgba(80, 160, 220, 0.25);
+            }
+        }
+        body.dark {
+            --wave-color1: rgba(60, 140, 220, 0.35);
+            --wave-color2: rgba(40, 120, 200, 0.30);
+            --wave-color3: rgba(80, 160, 220, 0.25);
+        }
+
+        /* ★ 浮动大光晕（更明显，在波浪之上） ★ */
         .floating-orb {
             position: fixed;
-            width: 500px;
-            height: 500px;
+            width: 600px;
+            height: 600px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(100, 180, 255, 0.15), transparent 70%);
+            background: radial-gradient(circle, var(--orb-color), transparent 70%);
             pointer-events: none;
-            z-index: 0;
-            animation: orbFloat 14s ease-in-out infinite alternate;
+            z-index: 1;
+            animation: orbFloat 16s ease-in-out infinite alternate;
             transition: background 0.4s ease;
+            filter: blur(30px);
+        }
+
+        :root {
+            --orb-color: rgba(100, 180, 255, 0.15);
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --orb-color: rgba(60, 140, 220, 0.30);
+            }
+        }
+        body.dark {
+            --orb-color: rgba(60, 140, 220, 0.30);
         }
 
         @keyframes orbFloat {
-            0%   { top: 5%; left: 5%; transform: scale(1); }
-            25%  { top: 10%; left: 70%; transform: scale(1.2); }
-            50%  { top: 70%; left: 80%; transform: scale(0.9); }
-            75%  { top: 80%; left: 10%; transform: scale(1.3); }
-            100% { top: 5%; left: 5%; transform: scale(1); }
+            0%   { top: 0%; left: 0%; transform: scale(1); }
+            25%  { top: 10%; left: 60%; transform: scale(1.3); }
+            50%  { top: 60%; left: 70%; transform: scale(0.8); }
+            75%  { top: 70%; left: 5%; transform: scale(1.4); }
+            100% { top: 0%; left: 0%; transform: scale(1); }
         }
 
-        /* 深色模式下浮动光晕变暗 */
-        @media (prefers-color-scheme: dark) {
-            .floating-orb {
-                background: radial-gradient(circle, rgba(60, 140, 220, 0.25), transparent 70%);
-            }
-        }
-        body.dark .floating-orb {
-            background: radial-gradient(circle, rgba(60, 140, 220, 0.25), transparent 70%);
-        }
-
-        /* ===== 卡片 ===== */
+        /* ===== 卡片（z-index 提高，确保在波浪之上） ===== */
         .card {
             max-width: 480px;
             width: 100%;
             background: var(--card-bg);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-radius: 40px;
             padding: 40px 35px 45px;
             box-shadow: 0 25px 50px -12px var(--card-shadow), inset 0 2px 4px rgba(255, 255, 255, 0.7), 0 0 0 1px var(--card-border);
@@ -86,7 +157,7 @@
             transition: transform 0.25s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
             text-align: center;
             position: relative;
-            z-index: 1;
+            z-index: 10;
             overflow: hidden;
         }
 
@@ -95,23 +166,35 @@
             box-shadow: 0 30px 60px -15px var(--card-shadow-hover), inset 0 2px 4px rgba(255, 255, 255, 0.7), 0 0 0 1px var(--card-border);
         }
 
-        /* 内部光晕（呼吸） */
+        /* 卡片内部光晕（呼吸，更明显） */
         .glow {
             position: absolute;
             top: -60%;
             left: -30%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle at 30% 30%, rgba(160, 210, 255, 0.15), transparent 70%);
+            background: radial-gradient(circle at 30% 30%, var(--glow-color), transparent 70%);
             pointer-events: none;
             z-index: 0;
             transition: background 0.4s ease;
-            animation: glowBreathe 4s ease-in-out infinite alternate;
+            animation: glowBreathe 5s ease-in-out infinite alternate;
+        }
+
+        :root {
+            --glow-color: rgba(160, 210, 255, 0.20);
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --glow-color: rgba(60, 140, 220, 0.30);
+            }
+        }
+        body.dark {
+            --glow-color: rgba(60, 140, 220, 0.30);
         }
 
         @keyframes glowBreathe {
             0%   { transform: scale(1); opacity: 0.5; }
-            100% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1.3); opacity: 1; }
         }
 
         .card::before,
@@ -125,61 +208,45 @@
             transition: background 0.4s ease, opacity 0.4s ease;
         }
 
-        /* 左上装饰圆点（浮动） */
         .card::before {
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, var(--dot1-color), transparent 70%);
+            top: -50px;
+            right: -40px;
+            animation: floatDot1 9s ease-in-out infinite alternate;
+        }
+        .card::after {
             width: 150px;
             height: 150px;
-            background: radial-gradient(circle, #8ec6f0, transparent 70%);
-            top: -40px;
-            right: -30px;
-            animation: floatDot1 8s ease-in-out infinite alternate;
+            background: radial-gradient(circle, var(--dot2-color), transparent 70%);
+            bottom: -40px;
+            left: -40px;
+            animation: floatDot2 11s ease-in-out infinite alternate-reverse;
         }
 
-        /* 右下装饰圆点（浮动） */
-        .card::after {
-            width: 130px;
-            height: 130px;
-            background: radial-gradient(circle, #b3d9f5, transparent 70%);
-            bottom: -30px;
-            left: -30px;
-            animation: floatDot2 9s ease-in-out infinite alternate-reverse;
+        :root {
+            --dot1-color: #8ec6f0;
+            --dot2-color: #b3d9f5;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --dot1-color: #2a5a8a;
+                --dot2-color: #1a4a7a;
+            }
+        }
+        body.dark {
+            --dot1-color: #2a5a8a;
+            --dot2-color: #1a4a7a;
         }
 
         @keyframes floatDot1 {
             0%   { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(-20px, 15px) scale(1.2); }
+            100% { transform: translate(-30px, 20px) scale(1.25); }
         }
-
         @keyframes floatDot2 {
             0%   { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(20px, -15px) scale(1.15); }
-        }
-
-        /* ---------- 深色模式覆盖 ---------- */
-        @media (prefers-color-scheme: dark) {
-            .glow {
-                background: radial-gradient(circle at 30% 30%, rgba(60, 140, 220, 0.25), transparent 70%);
-            }
-            .card::before {
-                background: radial-gradient(circle, #2a5a8a, transparent 70%);
-                opacity: 0.6;
-            }
-            .card::after {
-                background: radial-gradient(circle, #1a4a7a, transparent 70%);
-                opacity: 0.6;
-            }
-        }
-
-        body.dark .glow {
-            background: radial-gradient(circle at 30% 30%, rgba(60, 140, 220, 0.25), transparent 70%);
-        }
-        body.dark .card::before {
-            background: radial-gradient(circle, #2a5a8a, transparent 70%);
-            opacity: 0.6;
-        }
-        body.dark .card::after {
-            background: radial-gradient(circle, #1a4a7a, transparent 70%);
-            opacity: 0.6;
+            100% { transform: translate(30px, -20px) scale(1.2); }
         }
 
         .title-wrapper {
@@ -275,7 +342,6 @@
             transform: scale(0.97);
         }
 
-        /* 主题切换按钮 */
         .theme-toggle {
             position: absolute;
             top: 24px;
@@ -317,18 +383,21 @@
             .b-btn { width: 190px; font-size: 0.95rem; padding: 10px 0; }
             .theme-toggle { top: 18px; right: 18px; width: 38px; height: 38px; }
             .theme-toggle svg { width: 20px; height: 20px; }
-            .floating-orb { width: 200px; height: 200px; }
+            .floating-orb { width: 300px; height: 300px; }
         }
     </style>
 </head>
 <body>
+
+    <!-- ★★★ 波浪背景 ★★★ -->
+    <div class="wave-bg"></div>
+
     <!-- ★ 浮动光晕球 ★ -->
     <div class="floating-orb"></div>
 
     <div class="card">
         <div class="glow"></div>
 
-        <!-- 主题切换按钮 -->
         <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
             <svg viewBox="0 0 24 24" id="themeIcon">
                 <path d="M12 3a9 9 0 1 0 9 9 9 9 0 0 0-9-9zm0 16a7 7 0 1 1 7-7 7 7 0 0 1-7 7z"/>
@@ -336,13 +405,11 @@
             </svg>
         </button>
 
-        <!-- 标题区 -->
         <div class="title-wrapper">
             <img class="title-icon" src="./image/zhuzi.png" alt="竹子图标" />
             <h1 class="card-title">一只无聊的竹子</h1>
         </div>
 
-        <!-- 按钮组 -->
         <div class="btn-group">
             <a href="./dl/" class="btn">进入空间</a>
             <a href="https://space.bilibili.com/3707020345608714" target="_blank" rel="noopener noreferrer" class="b-btn">B站主页</a>
