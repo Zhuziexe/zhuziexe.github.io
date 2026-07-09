@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChengziOS 官网</title>
+
+    <!-- ===== 外部主题样式 ===== -->
+    <link rel="stylesheet" href="../theme.css" />
+    <!-- ===== 页面自定义样式 ===== -->
+    <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+
+    <!-- ============================================================
+    🌗 主题切换按钮（直接包含 SVG）
+    ============================================================ -->
+    <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+        <svg viewBox="0 0 24 24" id="themeIcon">
+            <path d="M12 2a9 9 0 1 0 9 9 9 9 0 0 1-9-9z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- ============================================================
+    🏠 首屏
+    ============================================================ -->
+    <section class="hero" id="top">
+        <div class="hero-content">
+            <h1>ChengziOS</h1>
+            <p>欢迎来到 ChengziOS 官网</p>
+        </div>
+        <button class="scroll-indicator" aria-label="向下滚动" onclick="document.getElementById('intro').scrollIntoView({ behavior: 'smooth' });">
+            <span class="arrow">⌄</span>
+        </button>
+    </section>
+
+    <!-- ============================================================
+    📝 简介
+    ============================================================ -->
+    <section class="intro" id="intro">
+        <div class="container">
+            <h2>这是一个简介</h2>
+            <p>
+                这是一个简介罢了
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    🃏 卡片（已移除简介字段和占位符）
+    ============================================================ -->
+    <section class="cards-section" id="cards">
+        <div class="container">
+            <div class="cards-grid">
+                <!-- 卡片 1 -->
+                <div class="card">
+                    <div class="card-image">
+                        <img src="../image/chengzios.jpg" alt="卡片图片" />
+                    </div>
+                    <div class="card-body">
+                        <h3>多任务操作</h3>
+                        <p class="card-desc">同时开启多个窗口，效率翻倍</p>
+                    </div>
+                </div>
+                <!-- 卡片 2 -->
+                <div class="card">
+                    <div class="card-image">
+                        <img src="../image/chengziosb.jpg" alt="卡片图片" />
+                    </div>
+                    <div class="card-body">
+                        <h3>浏览器</h3>
+                        <p class="card-desc">这是一个描述(bushi</p>
+                    </div>
+                </div>
+                <!-- 卡片 3 -->
+                <div class="card">
+                    <div class="card-image">
+                        <img src="../image/chengziosg.jpg" alt="卡片图片" />
+                    </div>
+                    <div class="card-body">
+                        <h3>丰富的个性化支持</h3>
+                        <p class="card-desc">壁纸可随意更改，预设三张壁纸，还可以上传自己的壁纸图片</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    🚪 传送门
+    ============================================================ -->
+    <section class="portal" id="portal">
+        <div class="container">
+            <h2>传送门</h2>
+            <div class="portal-buttons">
+                <a href="./dl/" class="portal-btn">下载</a>
+                <a href="../" class="portal-btn outline">竹子的主页</a>
+                <a href="https://space.bilibili.com/3707020345608714" class="portal-btn outline" target="_blank">B站</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    📌 页脚
+    ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            🍊 ChengziOS &middot; 这是一个页脚
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    📦 外部主题脚本
+    ============================================================ -->
+    <script src="../theme.js">
+    </script>
+
+    <!-- ============================================================
+    ✨ 辅助脚本（修复白色闪现 + 键盘可访问）
+    ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ---------- 动态设置 html 背景色，消除白色闪现 ----------
+            function setHtmlBg() {
+                const isDark = document.body.classList.contains('dark');
+                document.documentElement.style.backgroundColor = isDark ? '#1a3050' : '#e6f3ff';
+            }
+
+            setHtmlBg();
+
+            const observer = new MutationObserver(function(mutations) {
+                for (const mutation of mutations) {
+                    if (mutation.attributeName === 'class') {
+                        setHtmlBg();
+                    }
+                }
+            });
+            observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+            // ---------- 键盘支持箭头按钮 ----------
+            const arrowBtn = document.querySelector('.scroll-indicator');
+            if (arrowBtn) {
+                arrowBtn.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            }
+
+            console.log('🍊 ChengziOS 官网已加载');
+        })();
+    </script>
+
+</body>
+</html>

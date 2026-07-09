@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>下载 ChengziOS</title>
+
+    <!-- ===== 外部主题样式 ===== -->
+    <link rel="stylesheet" href="../../theme.css" />
+    <link rel="stylesheet" href="../style.css" />
+
+    <style>
+        /* ============================================================
+           📥 下载页专属样式
+           ============================================================ */
+
+        /* ---------- 覆盖容器最大宽度，适配下载页 ---------- */
+        .container {
+            max-width: 720px;
+        }
+
+        /* ---------- 返回按钮（左上角） ---------- */
+        .back-btn {
+            position: fixed;
+            top: 24px;
+            left: 28px;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px 10px 14px;
+            border-radius: 40px;
+            border: 1.5px solid var(--card-border);
+            background: var(--back-btn-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 18px rgba(0, 20, 40, 0.10);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: background 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .back-btn:hover {
+            background: var(--toggle-hover);
+            transform: scale(1.04);
+            box-shadow: 0 6px 28px rgba(0, 20, 40, 0.18);
+        }
+        .back-btn:active {
+            transform: scale(0.94);
+        }
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        /* ---------- 下载主内容 ---------- */
+        .download-hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 24px 60px;
+            position: relative;
+        }
+
+        .download-content {
+            max-width: 640px;
+            margin: 0 auto;
+            animation: fadeUp 0.8s ease-out both;
+        }
+
+        .download-content h1 {
+            font-size: clamp(2.8rem, 8vw, 4.8rem);
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            background: linear-gradient(145deg, var(--text-primary), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            margin-bottom: 0.3em;
+            text-shadow: 0 2px 30px rgba(70, 150, 220, 0.12);
+        }
+
+        .download-content .subtitle {
+            font-size: clamp(1.2rem, 2.8vw, 1.8rem);
+            font-weight: 300;
+            color: var(--text-secondary);
+            letter-spacing: 0.04em;
+            margin-bottom: 1.8em;
+            opacity: 0.85;
+        }
+
+        /* ---------- 下载按钮 ---------- */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px 56px;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            border: none;
+            background: var(--btn-bg);
+            color: #fff;
+            box-shadow: 0 6px 28px var(--btn-shadow);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.4s ease, background 0.3s ease;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            font-family: inherit;
+        }
+        .download-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent 60%);
+            pointer-events: none;
+            border-radius: inherit;
+        }
+        .download-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 40px var(--btn-shadow-hover);
+        }
+        .download-btn:active {
+            transform: scale(0.95);
+        }
+        .download-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        /* ---------- 版本信息小字 ---------- */
+        .version-info {
+            margin-top: 2.2em;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            opacity: 0.5;
+            letter-spacing: 0.04em;
+        }
+
+        /* ---------- 复用主页 fadeUp 动画 ---------- */
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ---------- 响应式 ---------- */
+        @media (max-width: 768px) {
+            .back-btn {
+                top: 16px;
+                left: 16px;
+                padding: 8px 14px 8px 10px;
+                font-size: 0.85rem;
+            }
+            .back-btn svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .download-hero {
+                padding: 80px 16px 50px;
+            }
+            .download-content h1 {
+                font-size: clamp(2.2rem, 10vw, 3.6rem);
+            }
+            .download-content .subtitle {
+                font-size: clamp(1rem, 3vw, 1.4rem);
+            }
+            .download-btn {
+                padding: 14px 40px;
+                font-size: 1rem;
+            }
+            .download-btn svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .back-btn {
+                top: 12px;
+                left: 12px;
+                padding: 6px 12px 6px 8px;
+                font-size: 0.8rem;
+                border-radius: 30px;
+            }
+            .back-btn svg {
+                width: 16px;
+                height: 16px;
+            }
+            .download-hero {
+                padding: 70px 12px 40px;
+            }
+            .download-content h1 {
+                font-size: clamp(1.8rem, 12vw, 2.8rem);
+            }
+            .download-content .subtitle {
+                font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+                margin-bottom: 1.4em;
+            }
+            .download-btn {
+                padding: 12px 32px;
+                font-size: 0.95rem;
+                min-width: 160px;
+            }
+            .download-btn svg {
+                width: 18px;
+                height: 18px;
+            }
+            .version-info {
+                font-size: 0.75rem;
+                margin-top: 1.6em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+    🔙 返回按钮（左上角）
+    ============================================================ -->
+    <a href="../" class="back-btn" aria-label="返回">
+        <svg viewBox="0 0 24 24">
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+        </svg>
+        返回
+    </a>
+
+    <!-- ============================================================
+    🌗 主题切换按钮（右上角，复用主页样式）
+    ============================================================ -->
+    <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+        <svg viewBox="0 0 24 24" id="themeIcon">
+            <path d="M12 2a9 9 0 1 0 9 9 9 9 0 0 1-9-9z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- ============================================================
+    📥 下载主内容
+    ============================================================ -->
+    <section class="download-hero">
+        <div class="download-content">
+            <h1>下载 ChengziOS</h1>
+            <p class="subtitle">下载最新版：0.5.2</p>
+
+            <a href="../../files/ChengziOS0.5.2.sb3" class="download-btn" download>
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>
+                    <polyline points="8 12 12 16 16 12"/>
+                    <line x1="12" y1="2" x2="12" y2="16"/>
+                </svg>
+                下载
+            </a>
+
+            <p class="version-info">若下载链接按了无反应，试试Ctrl+Shift+R忽略缓存强制刷新</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    📦 外部主题脚本
+    ============================================================ -->
+    <script src="../../theme.js">
+    </script>
+
+    <!-- ============================================================
+    ✨ 辅助脚本（修复白色闪现 + 键盘可访问）
+    ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ---------- 动态设置 html 背景色，消除白色闪现 ----------
+            function setHtmlBg() {
+                const isDark = document.body.classList.contains('dark');
+                document.documentElement.style.backgroundColor = isDark ? '#1a3050' : '#e6f3ff';
+            }
+
+            setHtmlBg();
+
+            const observer = new MutationObserver(function(mutations) {
+                for (const mutation of mutations) {
+                    if (mutation.attributeName === 'class') {
+                        setHtmlBg();
+                    }
+                }
+            });
+            observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+            console.log('📥 下载页面已加载');
+        })();
+    </script>
+
+</body>
+</html>
