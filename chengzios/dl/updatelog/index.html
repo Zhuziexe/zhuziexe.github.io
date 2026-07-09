@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChengziOS更新日志</title>
+
+
+    <style>
+        /* ============================================================
+           📥 下载页专属样式
+           ============================================================ */
+
+        /* ---------- 覆盖容器最大宽度，适配下载页 ---------- */
+        
+        body{
+            background-color: #a6dbf0;
+        }
+
+
+        .container {
+            max-width: 720px;
+        }
+
+        /* ---------- 返回按钮（左上角） ---------- */
+        .back-btn {
+            width: fit-content;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px 10px 14px;
+            border-radius: 40px;
+            border: 1.5px solid var(--card-border);
+            background: #ffffff;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 18px rgba(0, 20, 40, 0.10);
+            color: #000;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: background 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.85);
+            transform: scale(1.04);
+            box-shadow: 0 6px 28px rgba(0, 20, 40, 0.18);
+        }
+        .back-btn:active {
+            transform: scale(0.94);
+        }
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+        .contentbox{
+            width: 60%;
+            height: 80vw;
+            border-radius: 10px;
+            margin: 16px auto;
+            padding: 20px 10%;
+            background-color: #ffffff;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+    🔙 返回按钮（左上角）
+    ============================================================ -->
+    <a href="../" class="back-btn" aria-label="返回">
+        返回
+    </a>
+    <!-- ============================================================
+    📦 内容
+    ============================================================ -->
+    <div class="contentbox">
+        <h1>ChengziOS更新日志</h1>
+        <p>这里什么都没有哦~</p>
+    </div>
+</body>
+</html>

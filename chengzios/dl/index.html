@@ -61,6 +61,14 @@
             stroke-linejoin: round;
             flex-shrink: 0;
         }
+        .btncontainer{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            gap: 10px;
+        }
 
         /* ---------- 下载主内容 ---------- */
         .download-hero {
@@ -91,6 +99,7 @@
             line-height: 1.2;
             margin-bottom: 0.3em;
             text-shadow: 0 2px 30px rgba(70, 150, 220, 0.12);
+            padding-bottom: 20px;
         }
 
         .download-content .subtitle {
@@ -148,6 +157,31 @@
             stroke-linecap: round;
             stroke-linejoin: round;
             flex-shrink: 0;
+        }
+
+        .updatelog-btn{
+            padding: 16px 46px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            border-style: solid;
+            border-width: 2px;
+            border-color: var(--btn-bg);
+            /*border: var(--btn-bg);*/
+            background: var(--back-btn-bg);
+            color: var(--text-primary);
+            box-shadow: 0 6px 28px var(--btn-shadow);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.4s ease, background 0.3s ease;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            font-family: inherit;
+        }
+        .updatelog-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 40px var(--btn-shadow-hover);
         }
 
         /* ---------- 版本信息小字 ---------- */
@@ -275,7 +309,7 @@
         <div class="download-content">
             <h1>下载 ChengziOS</h1>
             <p class="subtitle">下载最新版：0.5.2</p>
-
+            <div class="btncontainer">
             <a href="../../files/ChengziOS0.5.2.sb3" class="download-btn" download>
                 <svg viewBox="0 0 24 24">
                     <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>
@@ -284,6 +318,10 @@
                 </svg>
                 下载
             </a>
+            <a href="./updatelog/" class="updatelog-btn">
+                更新日志
+            </a>
+            </div>
 
             <p class="version-info">若下载链接按了无反应，试试Ctrl+Shift+R忽略缓存强制刷新</p>
         </div>
@@ -319,7 +357,7 @@
             });
             observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 
-            console.log('📥 下载页面已加载');
+            console.log('下载页面已加载');
         })();
     </script>
 
