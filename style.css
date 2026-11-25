@@ -1,20 +1,3 @@
-/* ============================================================
-   一只无聊的竹子 · 公共样式库
-   All pages share this file. No frameworks, no build step.
-   ------------------------------------------------------------
-   1. Tokens          7. Page head / prose
-   2. Base            8. Works grid
-   3. Layout          9. Sitemap cards
-   4. Header & nav   10. Footer
-   5. Buttons        11. Reveal / motion / print
-   6. Hero
-   ------------------------------------------------------------
-   悬停规则全部写在 @media (hover: hover) and (pointer: fine) 内，
-   触屏设备不会出现「卡住的悬停」，改用 :active 反馈。
-   ============================================================ */
-
-/* ---------- 1. Tokens -------------------------------------- */
-
 :root {
   color-scheme: light;
 
@@ -32,7 +15,6 @@
   --surface: #ffffff;
   --surface-2: #eef5e5;
 
-  /* 文字对比度拉高，正文不吃力 */
   --text: #132218;
   --text-soft: #2b3f31;
   --text-mute: #4a6152;
@@ -91,8 +73,6 @@
   }
 }
 
-/* ---------- 2. Base ---------------------------------------- */
-
 *,
 *::before,
 *::after {
@@ -109,7 +89,6 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: var(--font-sans);
-  /* 字号与字重都调重一点，避免细字发虚 */
   font-size: 17px;
   font-weight: 500;
   line-height: 1.78;
@@ -184,8 +163,6 @@ code {
   border-radius: 6px;
 }
 
-/* ---------- 3. Layout -------------------------------------- */
-
 .wrap {
   width: 100%;
   max-width: var(--maxw);
@@ -230,8 +207,6 @@ main {
 .center {
   text-align: center;
 }
-
-/* ---------- 4. Header & nav -------------------------------- */
 
 .site-header {
   position: sticky;
@@ -290,19 +265,19 @@ main {
 
 .nav a {
   display: inline-block;
-  padding: 0.45rem 0.85rem;
-  border-radius: var(--radius-pill);
+  padding: 0.4rem 0.7rem;
   color: var(--text-soft);
   font-size: 0.96rem;
   font-weight: 600;
   text-decoration: none;
-  transition: color 0.2s var(--ease), background 0.2s var(--ease);
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
 }
 
 .nav a[aria-current="page"] {
   color: var(--brand-ink);
-  background: var(--brand-soft);
   font-weight: 750;
+  border-bottom-color: var(--brand);
 }
 
 @media (max-width: 640px) {
@@ -345,12 +320,8 @@ main {
   .nav a {
     flex: 0 0 auto;
     scroll-snap-align: start;
-    border: 1px solid var(--line);
-    background: color-mix(in srgb, var(--surface) 75%, transparent);
   }
 }
-
-/* ---------- 5. Buttons ------------------------------------- */
 
 .btn {
   display: inline-flex;
@@ -402,9 +373,8 @@ main {
   align-items: center;
 }
 
-/* 按钮悬停时必须保持自己的文字颜色，不能被全局 a:hover 抢走 */
 @media (hover: hover) and (pointer: fine) {
-  a:not(.btn):not(.brand):not(.work__link):not(.map-card):not(.scroll-hint):hover {
+  a:not(.btn):not(.brand):not(.work__link):not(.map-card):not(.scroll-hint):not(.hero-notes__link):hover {
     color: var(--brand);
   }
 
@@ -413,8 +383,7 @@ main {
   }
 
   .nav a:hover {
-    color: var(--text);
-    background: var(--brand-soft);
+    color: var(--brand-strong);
   }
 
   .btn--primary:hover {
@@ -433,7 +402,6 @@ main {
 }
 
 @media (hover: none) {
-  .nav a:active,
   .btn--ghost:active {
     background: var(--brand-soft);
     color: var(--brand-ink);
@@ -443,8 +411,6 @@ main {
     color: #fff;
   }
 }
-
-/* ---------- 6. Hero ---------------------------------------- */
 
 .hero {
   position: relative;
@@ -483,8 +449,16 @@ main {
   font-weight: 500;
   color: var(--text-soft);
   max-width: 40ch;
-  /* 与下方按钮拉开距离 */
-  margin-bottom: 2.3rem;
+  margin-bottom: 1rem;
+}
+
+.hero__aside {
+  font-size: 0.95rem;
+  color: var(--text-mute);
+  max-width: 46ch;
+  border-left: 2px solid var(--line-strong);
+  padding-left: 0.9rem;
+  margin-bottom: 2rem;
 }
 
 .scroll-hint {
@@ -510,11 +484,39 @@ main {
   30% { transform: translateY(4px); }
 }
 
-/* 竹子：只用 image/zhuzi.png 这一张图 */
 .hero__art {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
   min-height: 280px;
+}
+
+.hero__blurb {
+  order: -1;
+  align-self: stretch;
+  max-width: 320px;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  box-shadow: var(--shadow-xs);
+}
+
+.hero__blurb-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  color: var(--brand-strong);
+  margin-bottom: 0.4rem;
+}
+
+.hero__blurb p {
+  margin: 0;
 }
 
 @media (max-width: 860px) {
@@ -546,7 +548,58 @@ main {
   50% { transform: translateY(-10px) rotate(1.4deg); }
 }
 
-/* ---------- 7. Page head / prose --------------------------- */
+.hero-notes__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: clamp(0.9rem, 2vw, 1.3rem);
+}
+
+.hero-notes__card {
+  display: block;
+  padding: clamp(1.1rem, 2.4vw, 1.4rem);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  box-shadow: var(--shadow-xs);
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease),
+    border-color 0.3s var(--ease);
+}
+
+.hero-notes__card p {
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  margin: 0.5rem 0 0.8rem;
+}
+
+.hero-notes__label {
+  font-family: var(--font-sans);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--brand-strong);
+}
+
+.hero-notes__link {
+  font-size: 0.9rem;
+  font-weight: 750;
+  color: var(--brand-strong);
+  text-decoration: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hero-notes__card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--brand) 42%, var(--line));
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+.hero-notes__card:active {
+  transform: scale(0.99);
+}
 
 .page-head {
   padding-block: clamp(1.9rem, 4.5vw, 3.2rem) clamp(1.1rem, 2.5vw, 1.8rem);
@@ -569,10 +622,10 @@ main {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.45rem;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.05em;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.98rem;
+  letter-spacing: 0.01em;
   color: var(--text-mute);
   margin-bottom: 1rem;
 }
@@ -600,12 +653,9 @@ main {
   color: var(--text-soft);
 }
 
-/* ---------- 8. Works grid ---------------------------------- */
-
 .works {
   list-style: none;
   display: grid;
-  /* 电脑 2~3 列，平板 2 列，手机 1 列 */
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: clamp(0.9rem, 2vw, 1.3rem);
 }
@@ -619,8 +669,11 @@ main {
   border-radius: var(--radius);
   background: color-mix(in srgb, var(--surface) 92%, transparent);
   box-shadow: var(--shadow-xs);
+  text-decoration: none;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
   transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease),
-    border-color 0.3s var(--ease);
+    border-color 0.3s var(--ease), background 0.3s var(--ease);
 }
 
 .work__num {
@@ -628,18 +681,38 @@ main {
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.14em;
-  color: var(--brand-strong);
+  color: var(--text-mute);
 }
 
 .work h2 {
-  font-size: clamp(1.15rem, 2.3vw, 1.4rem);
+  font-family: var(--font-sans);
+  font-size: clamp(1.5rem, 3vw, 1.85rem);
+  font-weight: 800;
   margin: 0.25rem 0 0.5rem;
 }
 
 .work p {
   color: var(--text-soft);
   font-size: 0.95rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.work__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--text-mute);
+  margin-bottom: 0.9rem;
+}
+
+.work__status {
+  padding: 0.1rem 0.5rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line-strong);
+  color: var(--brand-strong);
 }
 
 .work__link {
@@ -651,14 +724,18 @@ main {
   font-size: 0.94rem;
   font-weight: 750;
   color: var(--brand-strong);
-  text-decoration: none;
-  padding: 0.4rem 0;
+  padding: 0.4rem 0 0;
 }
 
 .work__link svg {
   width: 15px;
   height: 15px;
   transition: transform 0.26s var(--ease-out);
+}
+
+.work h2,
+.map-card h2 {
+  letter-spacing: -0.02em;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -676,8 +753,6 @@ main {
 .work:active {
   transform: scale(0.99);
 }
-
-/* ---------- 9. Sitemap cards ------------------------------- */
 
 .sitemap-cards {
   list-style: none;
@@ -712,7 +787,9 @@ main {
 }
 
 .map-card h2 {
-  font-size: 1.3rem;
+  font-family: var(--font-sans);
+  font-size: clamp(1.5rem, 3vw, 1.85rem);
+  font-weight: 800;
   margin: 0.1rem 0 0;
 }
 
@@ -740,8 +817,6 @@ main {
 .map-card:active {
   transform: scale(0.99);
 }
-
-/* ---------- 10. Footer ------------------------------------- */
 
 .site-footer {
   margin-top: var(--section-y);
@@ -786,8 +861,6 @@ main {
   }
 }
 
-/* ---------- 11. Reveal / motion / print -------------------- */
-
 html.js .reveal {
   opacity: 0;
   transform: translateY(16px);
@@ -800,23 +873,112 @@ html.js .reveal.is-in {
   transform: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+html.work-detail-mode #work-list-wrap {
+  display: none;
+}
 
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-  }
+html:not(.work-detail-mode) #work-detail-wrap {
+  display: none;
+}
 
-  html.js .reveal {
-    opacity: 1;
-    transform: none;
-  }
+.notes {
+  list-style: none;
+  border-left: 2px solid var(--line);
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.note {
+  position: relative;
+  padding: 0 0 clamp(1.4rem, 3vw, 2rem) clamp(1.2rem, 3vw, 1.8rem);
+}
+
+.note::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 0.6rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--brand);
+  box-shadow: 0 0 0 4px var(--bg);
+}
+
+.note time {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--brand-strong);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.note p {
+  color: var(--text-soft);
+  margin: 0;
+}
+
+.detail h1 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: clamp(1.9rem, 4.4vw, 2.7rem);
+  margin-bottom: 0.8rem;
+}
+
+.detail__status {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--brand-strong);
+  padding: 0.2rem 0.7rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  letter-spacing: 0;
+}
+
+.detail__lead {
+  color: var(--text-soft);
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
+
+.detail h2 {
+  font-size: clamp(1.2rem, 2.6vw, 1.5rem);
+  margin-bottom: 0.8rem;
+}
+
+.detail__features {
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+  margin-bottom: 2rem;
+}
+
+.detail__features li {
+  position: relative;
+  padding-left: 1.4rem;
+  color: var(--text-soft);
+}
+
+.detail__features li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--bamboo-500);
+}
+
+.detail__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
 }
 
 @media print {
@@ -844,5 +1006,10 @@ html.js .reveal.is-in {
   a {
     color: #000;
     text-decoration: underline;
+  }
+
+  html.js .reveal {
+    opacity: 1;
+    transform: none;
   }
 }

@@ -17,13 +17,14 @@
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="./index.html" aria-label="一只无聊的竹子 · 主页">
+    <a class="brand" href="./" aria-label="一只无聊的竹子 · 主页">
       <img class="brand-logo" src="./image/zhuzi.png" alt="" width="34" height="34" />
       <span class="brand-name">一只无聊的竹子</span>
     </a>
     <nav class="nav" aria-label="主导航">
-      <a href="./index.html" aria-current="page">主页</a>
+      <a href="./" aria-current="page">主页</a>
       <a href="./works.html">作品页</a>
+      <a href="./notes.html">碎碎念</a>
       <a href="./about.html">关于页</a>
       <a href="./sitemap.html">网站地图</a>
     </nav>
@@ -37,7 +38,12 @@
         <div class="hero__copy">
           <h1 class="reveal">一只无聊的<br /><em>竹子</em></h1>
           <p class="lead reveal" style="--d:80ms">
-            就是一只竹子罢了。站得久了，闲得发慌，于是把做过的东西都堆在这里。
+            站得久了，闲得发慌，于是把做过的东西都堆在这里。
+          </p>
+          <p class="hero__aside reveal" style="--d:120ms">
+            严格来说这不是竹子，是一个拿竹子当头像的人。
+            竹子不会熬夜改代码，也不会因为一个按钮圆角差两像素纠结半小时。
+            人会，所以才有了这个站。
           </p>
           <div class="btn-row reveal" style="--d:160ms">
             <a class="btn btn--primary" href="./works.html">
@@ -45,13 +51,39 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
             <a class="btn btn--ghost" href="./about.html">关于页</a>
-            <a class="btn btn--ghost" href="./sitemap.html">网站地图</a>
           </div>
         </div>
 
         <div class="hero__art reveal" style="--d:120ms">
+          <div class="hero__blurb">
+            <span class="hero__blurb-tag">现在</span>
+            <p>在折腾一堆浏览器里的「系统」。</p>
+            <p>蓝色的手机，绿色的电脑，偶尔通个电话。</p>
+          </div>
           <img class="hero-bamboo" src="./image/zhuzi.png" alt="像素竹子图标" width="250" height="250" />
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight hero-notes">
+    <div class="wrap">
+      <div class="hero-notes__grid">
+        <a class="hero-notes__card reveal" href="./works.html">
+          <span class="hero-notes__label">关于这些作品</span>
+          <p>大多是一个念头起来就做，做到能跑就先放着。有些越滚越大，有些当场弃坑，都留着了。</p>
+          <span class="hero-notes__link">都在这儿 →</span>
+        </a>
+        <a class="hero-notes__card reveal" style="--d:80ms" href="./about.html">
+          <span class="hero-notes__label">关于更新</span>
+          <p>没有计划表。哪天突然想改点什么就改，改完可能又觉得还是原来那版顺眼。</p>
+          <span class="hero-notes__link">关于我 →</span>
+        </a>
+        <a class="hero-notes__card reveal" style="--d:160ms" href="./sitemap.html">
+          <span class="hero-notes__label">关于这个站</span>
+          <p>纯静态，没框架，没统计。打开快，断网也能看个大概，挺好。</p>
+          <span class="hero-notes__link">网站地图 →</span>
+        </a>
       </div>
     </div>
   </section>
